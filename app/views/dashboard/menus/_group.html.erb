@@ -1,0 +1,29 @@
+<div class="fields menu_group">
+
+  <h4>Menu Group</h4>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
+
+  <%= f.fields_for :options do |builder| %>
+    <%= render 'option', f: builder, group: true %>
+  <% end %>
+  <%= add_child_link "Add an option", :options, prefix: 'group', :class => "btn_small grey" %>
+  <% new_child_fields_template f, :options, partial: 'dashboard/menus/option', prefix: 'group', locals: {group: true} %>
+
+  <%= f.fields_for :items do |builder| %>
+    <%= render 'item', f: builder %>
+  <% end %>
+  <%= add_child_link "Add an item", :items, :class => "btn_small grey" %>
+  <% new_child_fields_template f, :items, partial: 'dashboard/menus/item' %>
+
+  <%= remove_child_link "remove group", f %>
+
+</div>

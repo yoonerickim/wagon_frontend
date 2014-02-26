@@ -1,0 +1,37 @@
+<%= form_for @user ||= User.new, { :html => { :id => "new_user" } }.merge!(options) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explaination">
+      <%= pluralize(@user.errors.count, "error") %> need to be fixed:
+      <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <p>
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name %>
+  </p>
+  <p>
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name %>
+  </p>
+  <p>
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </p>
+  <p>
+    <%= f.label :cell_phone, "Cell Phone #" %><br />
+    <%= f.text_field :cell_phone %>
+  </p>
+  <p>
+    <%= f.label :password %><br />
+    <%= f.password_field :password %>
+  </p>
+  <p>
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation %>
+  </p>
+  <%= f.submit "Create my account!" %>
+<% end %>

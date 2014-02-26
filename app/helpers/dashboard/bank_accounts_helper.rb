@@ -1,0 +1,2 @@
+module Dashboard::BankAccountsHelper
+end

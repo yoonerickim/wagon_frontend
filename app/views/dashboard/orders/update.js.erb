@@ -1,0 +1,6 @@
+var orderTableWrapper = $('#order_table_wrapper');
+orderTableWrapper.html("<%=j render 'dashboard/orders/order', order: @order %>");
+
+$('.deliverer_actions').html("<%=j render 'assign_deliverer' %>");
+$('.order_actions').html("<%=j render 'order_actions' %>");
+$('.payment_actions').html("<%=j render 'payment_actions' %>");

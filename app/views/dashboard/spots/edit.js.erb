@@ -1,0 +1,214 @@
+var spotOverlay = $('#spot-overlay');
+var spotContainer = $('#spot-map');
+var spotSearchInitialized = false;
+var spotMap = null;
+var spotMapOrigin = null;
+var spotGeocoder = new google.maps.Geocoder();
+var spotMarker = null;
+var spotPin = null;
+var spotPinImage = new google.maps.MarkerImage('/assets/pin.png', 
+    new google.maps.Size(32,39), // dimensions
+    new google.maps.Point(0,0), // origin
+    new google.maps.Point(6,35) // anchor point
+    );
+
+spotOverlay.children('#spot-overlay form:last').remove();
+$('#spot-overlay .overlay_content').append("<%=j render 'dashboard/spots/form' %>");
+
+initializeSpotMap(); // TODO ERROR HERE!!!!!!!!!!!!!!!!!!!!
+
+$('#spot-overlay form .tab1').click(function(event){ // change to tab1 button
+  initializeSpotTab();
+});
+
+function initializeSpotTab() {
+  if (spotMarker != null) {
+    spotMarker.setMap(null);
+  }
+  if (spotPin != null) {
+    spotPin.setMap(spotMap);
+  }
+  if (spotMap != null) {
+    spotMap.setOptions({ draggableCursor: 'crosshair' });
+  }
+  $('#spot-overlay form .tab2 input').attr('disabled', true);
+  $('#spot-overlay form .tab1 input').removeAttr('disabled');
+  $('#spot-overlay #spot_search').fadeIn(400, function() {
+    if (spotSearchInitialized == false) {
+      // attach events to trigger refocus of map
+      $('#spot_search').blur(function(){ // TODO Greg this has sometimes
+        refocusSpotMap()
+      });
+      $('#spot_search').keyup(function(event) {
+        if (event.which == 13) {
+          refocusSpotMap();
+        }
+      });
+      spotSearchInitialized = true;
+    }
+  });
+}
+
+$('#spot-overlay form .tab2').click(function(event){ // change to tab2 button
+  initializeAddressTab();
+});
+
+function initializeAddressTab() {
+  if (spotPin != null) {
+    spotPin.setMap(null);
+  }
+  if (spotMarker != null) {
+    spotMarker.setMap(spotMap);
+  }
+  if (spotMap != null) {
+    spotMap.setOptions({ draggableCursor: null });
+  }
+  $('#spot-overlay form .tab1 input').attr('disabled', true);
+  $('#spot-overlay form .tab2 input').removeAttr('disabled');
+  $('#spot-overlay #spot_search').fadeOut(400);
+}
+
+
+function initializeSpotMap() {
+  var lat = $('#address_lat').val();
+  var lng = $('#address_lng').val();
+  var address = joinAddress();
+  alert(lat + ' ' + lng);
+  if (lat.length > 0 && lng.length > 0) {
+    // there is a saved lat lng
+    initializeSpotTab();
+    spotMapOrigin = new google.maps.LatLng(lat, lng);
+    buildSpotMap();
+    dropSpotMapPin(spotMapOrigin);
+  } else if (address.length > 0) {
+    // there is a saved address
+    initializeAddressTab();
+    buildSpotMap();
+    spotSearch(address);
+  } else if (navigator.geolocation) {
+    initializeSpotTab();
+    navigator.geolocation.getCurrentPosition(geoSuccess, geoFailure);
+
+    function geoSuccess(position) {
+      spotMapOrigin = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+      buildSpotMap();
+    }
+
+    function geoFailure(error) {
+      alert("Geo Failure");
+    }
+
+  } else {
+    initializeSpotTab();
+    spotMapOrigin = new google.maps.LatLng(47.60621,-122.332071); // seattle
+    buildSpotMap();
+  }
+}
+
+function buildSpotMap() {
+  var spotMapOptions = {
+    zoom: 14,
+    center: spotMapOrigin,
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+    draggableCursor: 'crosshair'
+  }
+  spotMap = new google.maps.Map(spotContainer[0], spotMapOptions);
+
+  google.maps.event.addListener(spotMap, 'click', function(event) {
+    spotMapClick(event);
+  });
+
+}
+
+// do a spot search to refocus map
+function refocusSpotMap() {
+  var search = $('#spot_search').val();
+  if (search.length > 0) {
+    spotSearch(search);
+  }
+}
+
+// geocode search and sets map center
+// 
+function spotSearch(search) {
+  spotGeocoder.geocode({'address': search}, function(results, status){
+    if (status == google.maps.GeocoderStatus.OK) {
+      spotMapOrigin = results[0].geometry.location;
+      spotMap.setCenter(spotMapOrigin);
+
+      // this is only when setting a marker for an address
+      if ($('#spot-overlay .tab1 input').prop('disabled')) { // defining by address
+        google.maps.event.addListenerOnce(spotMap, 'idle', function(event){
+          dropMarker(spotMapOrigin, search);
+        });
+      }
+    } else {
+      alert("We could not find that location. Please try another location or an address.");
+    }
+  });
+}
+
+function spotMapClick(event) {
+  if ($('#spot-overlay .tab2 input').prop('disabled')) { // find spot
+    dropSpotMapPin(event.latLng);
+  }
+}
+
+function dropMarker(latLng, name) {
+  if (spotMarker != null) {
+    spotMarker.setMap(null);
+  }
+
+  var markerOptions = {
+    position: latLng,
+    map: spotMap,
+    title: name
+  };
+  spotMarker = new google.maps.Marker(markerOptions);
+}
+
+function dropSpotMapPin(latLng) {
+  if (spotPin != null) {
+    spotPin.setMap(null);
+  }
+  var pinOptions = {
+    position: latLng,
+    map: spotMap,
+    icon: spotPinImage,
+    draggable: true
+  };
+  spotPin = new google.maps.Marker(pinOptions);
+  google.maps.event.addListener(spotPin, 'dragend', setLatLng());
+}
+
+// sets latitude/longitude of hidden fields
+function setLatLng() {
+  if (spotPin != null) {
+    $('#spot-overlay #address_lat').prop('value', spotPin.getPosition().lat());
+    $('#spot-overlay #address_lng').prop('value', spotPin.getPosition().lng());
+  }
+}
+
+$('#spot-overlay .tab2 input').blur(function(event) {
+  var address = joinAddress();
+  if (address.length > 0) {
+    spotSearch(address);
+  }
+});
+
+function joinAddress() {
+  var address = "";
+  $('#spot-overlay .tab2 input').map(function(index, obj) {
+    var value = $(obj).val();
+    if (value.length > 0) {
+      if (address.length > 0) {
+        address = address + ', ';
+      }
+      address = address + value;
+    }
+  });
+  return address;
+}
+
+// show overlay
+spotOverlay.fadeIn(400);

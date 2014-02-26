@@ -1,0 +1,121 @@
+<script type="text/javascript">
+
+  var boundaryCoordinates = [];
+  var lastBoundary;
+  var boundaryMarker; 
+  var map3Marker; 		
+  var boundary; 
+  var circle;		
+  var map3 = null;
+
+  $(document).ready(function() {	
+
+    var latlng = new google.maps.LatLng(47.646163, -122.362420);
+    var myOptions = {
+      zoom: 11,
+      center: latlng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    map3 = new google.maps.Map(document.getElementById("map3"), myOptions);
+    map3.setOptions({ draggableCursor: 'crosshair' });
+
+    google.maps.event.addListener(map3,'click',buildBoundaries);
+    google.maps.event.addListener(map3,'rightclick',removeLastBoundary);
+
+
+    //---need to convert a string that looks like an array to an actual JS array of google latlng objects 
+    bcs = $('#delivery_boundaries_json').val();
+    bcs = bcs.replace(/[\[|\]|\s]/g, '');
+    bcs = bcs.split(",");
+    for(var i=0; i < (bcs.length - 1); i=i+2) {
+      boundaryCoordinates.push(new google.maps.LatLng(parseFloat(bcs[i]), parseFloat(bcs[i+1]))); 
+    } 
+    //----------------------
+
+    boundary = new google.maps.Polygon({
+      paths: boundaryCoordinates,
+      strokeColor: "#BD1206",
+      strokeOpacity: 0.7,
+      strokeWeight: 2,
+      fillColor: "#02DDD4",
+      fillOpacity: 0.3,
+      clickable: false
+    });
+    
+    boundary.setMap(map3);
+    lastBoundary = boundary;
+
+
+    $('#t2').click(function(){
+      google.maps.event.trigger(map3, 'resize');      
+      map3.setCenter(latlng);
+    })
+
+
+    function removeLastBoundary(){
+
+      if (boundaryCoordinates.length > 0){
+        boundaryCoordinates.pop();
+        var lastPos = boundaryCoordinates[boundaryCoordinates.length - 1]
+          setBoundaries(lastPos);
+      }
+    }
+
+    function setBoundaries(pos){
+
+      var image = '<%= asset_path("dot-blue-transparent.png") -%>';
+
+      if (boundaryMarker){boundaryMarker.setMap(null);};
+
+      if (boundaryCoordinates.length < 2){
+        boundaryMarker = new google.maps.Marker({
+          position: pos,
+          map: map3,
+          icon: image
+        });
+      }
+
+      boundary = new google.maps.Polygon({
+        paths: boundaryCoordinates,
+        strokeColor: "#BD1206",
+        strokeOpacity: 0.7,
+        strokeWeight: 2,
+        fillColor: "#02DDD4",
+        fillOpacity: 0.3,
+        clickable: false
+      });
+
+      if (lastBoundary) {
+        lastBoundary.setMap(null);
+      };
+      
+      boundary.setMap(map3);
+      lastBoundary = boundary;
+
+      var boutput = '[';
+      for(var i=0; i < boundaryCoordinates.length; i++) {
+        boutput += '[' + boundaryCoordinates[i].lat() + "," + boundaryCoordinates[i].lng() +  "]";
+        if (i != boundaryCoordinates.length - 1){boutput += ','}; 
+      }
+      boutput += ']';
+      $('#delivery_boundaries_json').val(boutput);	
+
+    }
+
+    function buildBoundaries(event) {
+      var thelatlng = new google.maps.LatLng(event.latLng.lat(), event.latLng.lng())
+        boundaryCoordinates.push(thelatlng);
+      setBoundaries(thelatlng); 
+    }					
+
+
+  });
+
+  function resetBoundries(){
+
+    boundaryCoordinates = [];
+    $('#delivery_boundaries_json').val('[]');
+    lastBoundary.setMap(null);
+
+  }
+</script>

@@ -1,0 +1,76 @@
+<% if !Rails.env.production? %>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#order_saved_card_attributes_card_number').val('4000100011112224');	 
+		$('#order_saved_card_attributes_expires_on_3i').val('9');
+		$('#order_saved_card_attributes_expires_on_2i').val('9');
+		$('#order_saved_card_attributes_expires_on_1i').val('2014');
+		$('#order_saved_card_attributes_card_type').val('visa');
+		$('#order_saved_card_attributes_card_cvv').val('123');
+		$('#order_saved_card_attributes_first_name').val('Tester');
+		$('#order_saved_card_attributes_last_name').val('Tester');
+		$('#order_saved_card_attributes_street1').val('123 1st St.');
+		$('#order_saved_card_attributes_city').val('Seattle');
+		$('#order_saved_card_attributes_state').val('WA');
+		$('#order_saved_card_attributes_zip').val('98122');
+  });
+</script>
+<% end %>
+
+<div class="cc_info">
+  <h3>New Credit Card</h3>
+  <%= f.fields_for :saved_card do |card_fields| %>
+    <div class="field full">
+      <%= card_fields.label :card_number %><br />
+      <%= card_fields.text_field :card_number %>
+    </div>
+
+    <div class="field half">
+      <%= card_fields.label :expires_on, "Expiration" %><br />
+      <%= card_fields.date_select :expires_on, discard_day: true, order: [:month, :year], add_month_numbers: true, start_year: Date.today.year %>
+    </div>
+    <div class="field half">
+      <%= card_fields.label :card_type %><br />
+      <%= card_fields.select :card_type, SavedCard::TYPES %>
+    </div>
+    <div class="field half end">
+      <%= card_fields.label :card_cvv, "CVV" %><br />
+      <%= card_fields.text_field :card_cvv %>
+    </div>
+    <div class="clear"></div>
+
+    <div class="field half">
+      <%= card_fields.label :first_name %><br />
+      <%= card_fields.text_field :first_name %>
+    </div>
+    <div class="field half end">
+      <%= card_fields.label :last_name %><br />
+      <%= card_fields.text_field :last_name %>
+    </div>
+		<div class="clear"></div>
+
+    <div class="field full">
+      <%= card_fields.label :street1 %><br />
+      <%= card_fields.text_field :street1 %>
+    </div>
+
+		<div class="field full">
+      <%= card_fields.label :street2 %><br />
+      <%= card_fields.text_field :street2 %>
+    </div>
+
+    <div class="field half">
+      <%= card_fields.label :city %><br />
+      <%= card_fields.text_field :city %>
+    </div>
+    <div class="field half end">
+      <%= card_fields.label :state %><br />
+      <%= card_fields.text_field :state %>
+    </div>
+    <div class="field half end">
+      <%= card_fields.label :zip %><br />
+      <%= card_fields.text_field :zip %>
+    </div>
+  <% end %><%# End saved_card_fields %>
+  <div class="clear"></div>
+</div>

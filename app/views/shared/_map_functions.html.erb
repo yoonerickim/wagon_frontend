@@ -1,0 +1,200 @@
+<script type="text/javascript">
+var geocoder = null;
+var vendors = new Array();
+var iterator = 0;
+var markers = new Array();
+var map2Marker = null
+var boundaryCoordinates = [];
+var lastBoundary;
+var boundaryMarker; 
+var map = null;
+var map2 = null; 
+
+function initialize() {
+	  geocoder = new google.maps.Geocoder();
+    var latlng = new google.maps.LatLng(<%= @origin['lat'] %>, <%= @origin['lng'] %>);
+    var myOptions = {
+        zoom: 14,
+        center: latlng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    map = new google.maps.Map(document.getElementById("map5"), myOptions);
+    map.setOptions({ draggableCursor: 'crosshair' });
+
+	  google.maps.event.addListener(map, "bounds_changed", function() {
+      var center = map.getBounds();
+      document.getElementById('lat1').value = center.getNorthEast().lat().toString();
+      document.getElementById('lng1').value = center.getNorthEast().lng().toString();
+      document.getElementById('lat2').value = center.getSouthWest().lat().toString();
+      document.getElementById('lng2').value = center.getSouthWest().lng().toString();
+    });
+
+
+    <% if @vendors.blank? -%>
+      map2 = new google.maps.Map(document.getElementById("map2"), myOptions);
+      map2.setOptions({ draggableCursor: 'crosshair', mapTypeId: google.maps.MapTypeId.HYBRID });
+    
+		  google.maps.event.addListener(map2, "click", function(event) {
+	      $('#lat').val(event.latLng.lat());
+	      $('#lng').val(event.latLng.lng());
+	      if (map2Marker != null){map2Marker.setMap(null)}
+			  map2Marker = new google.maps.Marker({
+			      position: event.latLng,
+			      map: map2, 
+			      title: $('#location_vendor_attributes_name').val()
+			  });
+	    });
+	  <% else -%>
+	
+	    <%= render :partial => 'shared/map_setup_vendors_array' -%>
+	    //increasebounds(map, vendors);
+	    put_markers_on_map(map, vendors);
+	
+    <% end -%>
+
+}
+
+function codeSignupAddress(){
+	if ($('.wizard .location_address_street1').val() != '' && $('.wizard .location_address_zip').val() != ''){
+	  var theaddress = $('.wizard .location_address_street1').val() + ' ' + $('.wizard .location_address_zip').val();  
+	  codeAddress(theaddress);
+	} 
+}
+
+function codeAddress(address) {
+  geocoder.geocode( { 'address': address}, function(results, status) {
+    if (status == google.maps.GeocoderStatus.OK) {	    
+      $('#lat').val(results[0].geometry.location.lat());
+      $('#lng').val(results[0].geometry.location.lng());
+
+      $('#map2_container').show();
+      google.maps.event.trigger(map2, 'resize');      
+
+      //var htsMarkerImage = '<%= asset_path("icon_pin.png") -%>';
+      if (map2Marker != null){map2Marker.setMap(null)}
+
+		  var myLatLng = new google.maps.LatLng( parseFloat($('#lat').val()), parseFloat($('#lng').val()));
+		  map2Marker = new google.maps.Marker({
+		      position: myLatLng,
+		      map: map2, 
+		      title: $('#location_vendor_attributes_name').val()
+		  });
+
+		  map2.setCenter(myLatLng);
+		  map2.setZoom(18);
+ 
+    }else{
+	    $('#lat').val('');
+	    $('#lng').val('');
+    }
+  });
+}
+
+//this would setup the vendors array to get stuff done
+<% if @vendors.present? -%>
+  <%= render :partial => 'shared/map_setup_vendors_array' -%>
+<% end -%>
+
+function addMarker(map, locations) {
+    //var image = new google.maps.MarkerImage('/images/map_icon_red.png',
+    //  new google.maps.Size(30, 45),
+    //  new google.maps.Point(0, 0),
+    //  new google.maps.Point(0, 30)
+    //);
+    //var shadow = new google.maps.MarkerImage('/images/map_icon_red.png',
+    //  new google.maps.Size(37, 32),
+    //  new google.maps.Point(0, 0),
+    //  new google.maps.Point(0, 32)
+    //);
+
+ 	  // Shapes define the clickable region of the icon.
+	  // The type defines an HTML &lt;area&gt; element 'poly' which
+	  // traces out a polygon as a series of X,Y points. The final
+	  // coordinate closes the poly by connecting to the first
+	  // coordinate.
+    //var shape = {
+    //  coord: [1, 1, 1, 20, 28, 20, 28, 1],
+    //  type: 'poly'
+    //};
+    var vendor = locations[iterator];
+    var myLatLng = new google.maps.LatLng(vendor[1], vendor[2]);
+
+    //icon: image,
+    //shape: shape,
+    var marker = new google.maps.Marker({
+        position: myLatLng,
+        map: map,
+        title: vendor[0],
+        zIndex: vendor[3]
+    });
+
+    iterator++;
+
+    var contentString = vendor[4];
+
+    var infowindow = new google.maps.InfoWindow({
+        content: contentString,
+        maxWidth: 440
+    });
+
+    google.maps.event.addListener(marker, 'click',
+    function() {
+        infowindow.open(map, marker);
+				map.panTo(myLatLng);
+    });
+
+    markers.push(marker);
+
+}
+
+
+function put_markers_on_map(map, locations) {
+    for (var i = 0; i < locations.length; i++) {
+        addMarker(map, locations);
+        //add this back for the fancy drop feature
+        //setTimeout(function() {
+        //    addMarker(map, locations);
+        //},
+        //i * 0);
+
+    }
+}
+
+function clearOverlays(){
+	for(var i=0; i < markers.length; i++){
+	    markers[i].setMap(null);
+	}
+	markers = new Array();
+	var iterator = 0;
+}
+
+
+function increasebounds(map, vendors){
+
+	if (vendors.length == 1){
+		  map.setZoom(14);
+		  g = vendors[0];
+		  map.setCenter(new google.maps.LatLng(g[1],g[2]));
+	}else{
+		if (vendors.length == 0){
+			map.setZoom(14);
+			map.setCenter(new google.maps.LatLng(<%= @origin['lat'] -%>, <%= @origin['lng'] -%>));
+		}else{
+	  var bounds = new google.maps.LatLngBounds();
+		for (var j = 0; j < vendors.length; j++){
+			g = vendors[j];
+			bounds.extend(new google.maps.LatLng(g[1],g[2]));
+		}
+		bounds.extend(new google.maps.LatLng(<%= @origin['lat'] -%>, <%= @origin['lng'] -%>));
+    map.fitBounds(bounds);
+    }
+	}
+}
+
+$(document).ready(function() {
+	initialize();
+
+});
+
+
+</script>

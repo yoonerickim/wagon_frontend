@@ -1,0 +1,86 @@
+<div class="overlay_wrapper">
+	<div class="top_box">
+	  <div class="location_info">
+      <%= link_to '#' do %>
+        <% if location.vendor.logo_image.present? %>
+          <%= image_tag location.vendor.logo_image.thumb('60x60#').url %>
+        <% else %>
+          <img src='/assets/img_default_logo.png'/>
+        <% end %>
+      <% end %>
+	    <div class='details'>
+	      <strong><%= location.vendor.name %></strong><br/>
+	      <%= location.address.street1 %><br/>
+	      <%= location.address.city %>, <%= location.address.state %>, <%= location.address.zip %>
+	    </div>
+	  </div>
+    <div class="order_list">
+      <% if @order.line_items.empty? %>
+        <div class="note">Your order is currently empty.</div>
+      <% end %>
+      <ul>
+        <%= render partial: 'line_items/line_item', collection: @order.line_items %>
+      </ul>
+    </div>
+	  <div class="subtotal">
+	    <h4>SUBTOTAL</h4>
+      <span><%= number_to_currency(@order.subtotal / 100.0) %></span>
+      <div class="order_btn">
+        <!-- AJAX -->
+      </div>
+	  </div>
+	  <div class="clear"></div>
+	</div>
+
+	<div class="categories">
+    <% location.menus.sort_by{|m| [m.active? ? 0 : 1, m.id] }.each do |menu| %>
+
+	    <h3 class="<%= menu_class menu %>"><%= link_to menu.name, "#" %></h3>
+
+			<div class="category">
+	    <% menu.groups.each do |group| %>
+
+				<h4 class="group-<%= group.id %>"><%= link_to group.name, "#" %></h4>
+	      <div class="items">
+	        <ul>
+	          <% reset_cycle 'item' %>
+	          <% group.items.each do |item| %>
+
+	            <li class="<%= cycle 'odd', 'even', :name => 'item' %> item-<%= item.id %>" >
+                <div class="thumb">
+                  <% if item.image.present? %>
+                    <%= link_to item.image.thumb('60x60#').url, class: 'lightbox_trigger' do %>
+                      <%= image_tag item.image.thumb('60x60#').url %>
+                    <% end %>
+                  <% else %>
+                    <a href='/assets/img_default_logo.png' class="lightbox_trigger"><img src='/assets/img_default_logo.png'/></a>
+                  <% end %>
+                </div>
+	              <div class="title"><strong><%= item.name %></strong></div>
+								<div class="price"><%= number_to_currency item.minimum_price / 100.0 %><%= "+" if item.has_options? %></div>
+								<div class="clear"></div>
+								<div class="bottom">
+
+                  <div id="new_line_item">
+                    <% if menu.active? %>
+                      <%= link_to "Add", new_line_item_path(menu_item_id: item.id, order_id: @order.id), remote: true, class: "options btn" %>
+                    <% else %>
+                      <%= link_to "View", new_line_item_path(menu_item_id: item.id, order_id: @order.id), remote: true, class: "options btn" %>
+                    <% end %>
+                  </div>
+
+                </div>
+	            </li>
+
+	          <% end %>
+	        </ul>
+	      </div>
+
+	    <% end %>
+			<div class="clear"></div>
+			</div>
+	  <% end %>
+	</div>
+	<div class="footer"></div>
+</div>
+<div class="close"><a href='#'>Close Window</a></div>

@@ -1,0 +1,16 @@
+<% content_for :terms do %>
+  <div class="field_group">
+
+    <div class="field">
+      <textarea readonly="readonly" style="font-size: 12px" cols="70" rows="10">
+        <%= render :partial => 'shared/terms' %>
+      </textarea>
+    </div>
+
+    <div class="field label_yes_no">
+      <%= check_box_tag 'user[vendor_terms]', @user.vendor_terms %>
+      <%= label_tag 'user_vendor_terms', "I agree with the terms and conditions." %>
+    </div>
+
+  </div>
+<% end %>

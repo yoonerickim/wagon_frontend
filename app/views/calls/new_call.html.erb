@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+    <Gather action="/calls/order_details_request_from_call?order_id=<%= @order.id %>" numDigits="1" method="GET" timeout="30">
+        <Say>
+	          Hello. You have a new order through Hit The Spot. 
+	          Order number <%= @order.id %>. 
+	          Check your Live Location Dashboard for the order details, 
+	          or press 1 to hear the details over the phone. 
+        </Say>
+        <Pause length="15"/>
+        <Say>
+					Check your Live Location Dashboard for the order details, 
+          or press 1 to hear the details over the phone.           
+        </Say>
+    </Gather>
+    <Say>Alright, I'll assume you will check your Dashboard. Please visit w w w dot Hit The Spot dot com to login. Goodbye!</Say>
+</Response>

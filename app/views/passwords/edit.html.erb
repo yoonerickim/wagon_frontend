@@ -1,0 +1,32 @@
+<div class="home">
+	<div id="content" class="sub login">
+		<div id="content_wrap" class="center">
+			<div id="main">
+				<%= form_for @user, :url => password_path(@user.password_reset_token) do |f| %>
+				  <% if @user.errors.any? %>
+				    <div id="error_explaination">
+				      <%= pluralize(@user.errors.count, "error") %> need to be fixed:
+				    </div>
+				    <ul>
+				      <% @user.errors.full_messages.each do |msg| %>
+				        <li><%= msg %></li>
+				      <% end %>
+				    </ul>
+				  <% end %>
+				  <p>
+				    <%= f.label :password, "Enter a new password" %><br />
+				    <%= f.password_field :password %>
+				  </p>
+				  <p>
+				    <%= f.label :password_confirmation %><br />
+				    <%= f.password_field :password_confirmation %>
+				  </p>
+				  <p>
+				    <%= f.submit "Update Password" %>
+				  </p>
+				<% end %>
+			</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>

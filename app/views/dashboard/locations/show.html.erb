@@ -1,0 +1,172 @@
+<div id="content" class="dashboard">
+  <div id="vendor_nav">
+    <ul>
+      <li><%= link_to "My Personal Account", dashboard_account_path %></li>
+      <% if @vendors.present? || current_user.is_super_user? %>
+        <li><%= link_to 'Vendors & Locations', dashboard_vendors_path %></li>
+      <% end %>
+      <li class="selected"><%= link_to @location.vendor.name, dashboard_location_path(@location) %></li>
+    </ul>
+  </div>
+  <div id="content_wrap">
+    <h2><%= @location.vendor.name %> &mdash; <%= @location.address.street1 %></h2>
+    <div id="main_tabs">
+      <ul class="tabs">
+        <li><a href="#tab1">Overview</a></li>
+        <li><a href="#tab2">Order History</a></li>
+        <li><a href="#tab3">Billing Details</a></li>
+      </ul>
+      <div class="tab_container">
+        <div id="tab1" class="tab_content">
+          <div style="background-color:#ddd;padding:30px 20px;margin-bottom:20px;"><div style="text-align:center;"><%= link_to "Go to Live Dashboard &raquo;".html_safe, live_dashboard_location_path(@location), :class => "enter-live-location btn_med" %></div></div>
+
+          <div class="chart" style="float:left;margin-right:20px;">
+            <img width="380" src="/assets/analytics_coming_soon.png"/>
+          </div>
+          <div class="chart" style="float:left;">
+            <img width="380" src="/assets/analytics_coming_soon.png"/>
+          </div>
+
+        </div>
+
+        <div id="tab2" class="tab_content">
+          <table>
+            <thead>
+              <tr>
+                <th width="100">Date</th>
+                <th width="400">Customer</th>
+                <th width="200">Assigned To</th>
+                <th width="150">Order Total</th>
+                <th width="150"></th>
+              </tr>
+            </thead>
+            <% @location.orders.completed.order('completed_at DESC, updated_at DESC').each do |order| %>
+              <tr>
+                <td class="date">
+                  <% if order.completed_at %>
+                    <span><%= order.completed_at.in_time_zone(order.location.time_zone).strftime '%m/%d/%y' %></span><br/>
+                    <%= order.completed_at.in_time_zone(order.location.time_zone).strftime '%l:%M %P' %>
+                  <% end %>
+                </td>
+                <td class="customer">
+                  <span><%= order.user.name %></span><br/>
+                  <!-- 1403 W. Broadway St. --><br/><%# TODO fix me %>
+                  <!-- City, State 12345 --> <br/>
+                  <%= number_to_phone order.user.cell_phone %>
+                </td>
+                <td><%= order.assigned_to.try(:name) %></td>
+                <td class="total"><%= number_to_currency order.total / 100.0 %></td>
+                <td class="actions">
+                  <%= link_to 'View Order', dashboard_order_path(order), class: 'btn_small grey' %>
+                </td>
+              </tr>
+            <% end %>
+          </table>
+        </div>
+        <div id="tab3" class="tab_content billing_history">
+          <h3>Bank Account</h3>
+          <table>
+            <thead>
+              <tr>
+                <th width="30%">Bank</th>
+                <th width="30%">Account</th>
+                <th width="40%"></th>
+              </tr>
+            </thead>
+            <tr id="bank_details">
+              <% if @location.bank_account.present? %>
+                <%= render 'bank_details', bank_account: @location.bank_account if @location.bank_account.present? %>
+              <% else %>
+                <td></td><td></td>
+                <td align="right" class="actions">
+                  <%= link_to 'Edit Account', new_dashboard_bank_account_path(location_id: @location.id), remote: true, id: "edit_bank", class: 'btn_small grey' %>
+                </td>
+              <% end %>
+            </tr>
+          </table>
+
+          <!-- 
+          <h3>Billing Information</h3>
+          <table>
+            <thead>
+              <tr>
+                <th width="60%">Address</th>
+                <th width="40%"></th>
+              </tr>
+            </thead>
+            <tr>
+              <td>
+                1234 Main Street<br/>
+                Seattle, WA 123456
+              </td>
+
+              <td align="right" class="actions">
+                <%= link_to 'Edit Billing Info', '#', class: 'btn_small grey' %>
+              </td>
+            </tr>
+          </table>
+          -->
+
+          <h3>Records of Deposits</h3>
+          <table>
+            <thead>
+              <tr>
+                <th width="20%">Date</th>
+                <th width="40%">Amount</th>
+                <th width="40%"></th>
+              </tr>
+            </thead>
+
+        <% if @thisIsFilledInCorrectly %>
+            <tr>
+              <td>
+                <!--  	01/01/12 -->
+              </td>
+              <td>
+                <!--  $98.17 -->
+              </td>
+              <td align="right" class="actions">
+                <%= link_to 'View Details', '#', class: 'btn_small grey' %>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <!--  01/08/12 -->
+              </td>
+              <td>
+                <!--  $114.17 -->
+              </td>
+              <td align="right" class="actions">
+                <%= link_to 'View Details', '#', class: 'btn_small grey' %>
+              </td>
+            </tr>
+        <% end %>
+
+          </table>
+
+
+        </div>
+        <div class="info_box view_order" style="display:none;">
+          <div class="navigation">
+            <a href="" class="close_info_box">Close</a>
+          </div>
+          <div class="content">
+
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus augue elit, dapibus in sagittis id, vehicula id erat. Mauris fermentum urna et metus semper sollicitudin. Duis eu enim tortor, ut suscipit velit. Aenean accumsan dictum enim vel molestie. In eu lorem mi, nec rutrum sem. Aenean lacinia, tortor quis sollicitudin aliquet, neque sem vestibulum est, eu mollis magna dui id tellus. Proin aliquet felis augue. Maecenas vel neque mauris, sed auctor sapien. Nulla facilisi. Proin sit amet nisi ante, molestie scelerisque sem. Nullam molestie, tellus ac faucibus luctus, risus tellus imperdiet leo, at vulputate libero nisi nec magna. Sed eu quam nulla. Aenean non est nunc. Nullam elementum dui ut nunc ornare et posuere neque vehicula. Aliquam dignissim mollis pulvinar. Suspendisse dui ipsum, facilisis a rhoncus sit amet, ultrices sit amet dolor.</p>
+          </div>
+        </div>
+      </div>
+      <div class="clear"></div>
+    </div>
+
+    <!-- end #main_tabs -->
+    <div id="module_boxes">
+
+
+      <div class="clear"></div>
+    </div>
+  </div>
+  <!--end content_wrap-->
+</div>
+<!--end content-->
+

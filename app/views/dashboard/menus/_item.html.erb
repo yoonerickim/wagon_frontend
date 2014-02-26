@@ -1,0 +1,35 @@
+<div class="fields menu_item">
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :dollars, 'Price' %>
+    <%= f.text_field :dollars, value: number_to_currency(f.object.dollars) %>
+  </div>
+  <div class="field">
+    <%= f.label :image %>
+    <%= f.file_field :image, :class=>"upload" %>
+    <%= f.hidden_field :retained_image %>
+    <%= image_tag f.object.image.thumb('100x100>').url if f.object.image_uid %>
+  </div>
+
+  <%= f.fields_for :sizes do |builder| %>
+    <%= render 'size', f: builder %>
+  <% end %>
+  <%= add_child_link "Add a size", :sizes, :class => "btn_small grey" %>
+  <% new_child_fields_template f, :sizes, partial: 'dashboard/menus/size' %>
+
+  <%= f.fields_for :options do |builder| %>
+    <%= render 'option', f: builder, group: false %>
+  <% end %>
+  <%= add_child_link "Add an option", :options, :class => "btn_small grey" %>
+  <% new_child_fields_template f, :options, partial: 'dashboard/menus/option' %>
+
+  <%= remove_child_link "remove item", f %>
+
+</div>
