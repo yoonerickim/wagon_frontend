@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  additional_cost: 1
+  menu_option_group_id: 1
+
+two:
+  name: MyString
+  additional_cost: 1
+  menu_option_group_id: 1

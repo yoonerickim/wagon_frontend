@@ -1,0 +1,11 @@
+<td>
+  <%= bank_account.institution %>
+</td>
+<td>
+  <% if bank_account.last_four.present? %>
+    ****<%= bank_account.last_four %>
+  <% end %>
+</td>
+<td align="right" class="actions">
+  <%= link_to 'Edit Account', edit_dashboard_bank_account_path(bank_account), remote: true, id: "edit_bank", class: 'btn_small grey' %>
+</td>

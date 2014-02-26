@@ -1,0 +1,33 @@
+<%= form_for [:dashboard, @location] do |f| %>
+  <% if @location.errors.any? %>
+    <div id="error_explaination">
+      <h4><%= pluralize(@location.errors.count, "error") %> need to be fixed:</h4>
+      <ul>
+        <% @location.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% render 'vendors/location', :f => f %>
+  <%= f.hidden_field :vendor_id %>
+
+  <%= content_for :location %>
+
+  <% unless @location.persisted? %>
+    <%= content_for :integration %>
+  <% else %>
+    <div class="field_group integrate">
+      <h3>Need to change how this location integrates with Hit the Spot?</h3>
+      <p><%= link_to 'Contact Us', contact_path %> to change your integration method.</p>
+    </div>
+  <% end %>
+
+  <%# content_for :billing_and_banking %>
+
+  <%= f.submit "Edit &raquo;".html_safe, :class=>"btn_med"%>
+	<div class="clear"></div>
+<% end %>
+<%= template_for :links %>
+<%= template_for :menu_uploads %>

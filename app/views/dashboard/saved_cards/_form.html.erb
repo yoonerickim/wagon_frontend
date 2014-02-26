@@ -1,0 +1,74 @@
+<div id="saved_cards">
+<%= form_for [:dashboard, @saved_card], remote: true do |f| %>
+<% if @saved_card.persisted? %>
+  <!--<h3>Edit card</h3>-->
+<% else %>
+  <!--<h3>New card</h3>-->
+<% end %>
+  <% if @saved_card.errors.any? %>
+    <div id="error_explaination">
+      <%= pluralize @saved_card.errors.count, 'error' %> need to be fixed:
+      <ul>
+        <% @saved_card.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field full">
+    <%= f.label :card_number %><br />
+    <%= f.text_field :card_number %>
+  </div>
+
+  <div class="field full">
+    <%= f.label :expires_on, "Expiration" %><br />
+    <%= f.date_select :expires_on, discard_day: true, order: [:month, :year], add_month_numbers: true, start_year: Date.today.year %>
+  </div>
+  <div class="field half">
+    <%= f.label :card_type %><br />
+    <%= f.select :card_type, SavedCard::TYPES %>
+  </div>
+  <div class="field half end">
+    <%= f.label :card_cvv, "CVV" %><br />
+    <%= f.text_field :card_cvv %>
+  </div>
+  <div class="clear"></div>
+
+  <div class="field half">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name %>
+  </div>
+  <div class="field half end">
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name %>
+  </div>
+  <div class="clear"></div>
+
+  <div class="field full">
+    <%= f.label :street1 %><br />
+    <%= f.text_field :street1 %>
+  </div>
+
+  <div class="field full">
+    <%= f.label :street2 %><br />
+    <%= f.text_field :street2 %>
+  </div>
+
+  <div class="field half">
+    <%= f.label :city %><br />
+    <%= f.text_field :city %>
+  </div>
+  <div class="field half end">
+    <%= f.label :state %><br />
+    <%= f.text_field :state %>
+  </div>
+  <div class="field half end">
+    <%= f.label :zip %><br />
+    <%= f.text_field :zip %>
+  </div>
+  <%= f.submit :class=>"btn_med"%>
+<div class="clear"></div>
+<% end %>
+<div class="clear"></div>
+</div>

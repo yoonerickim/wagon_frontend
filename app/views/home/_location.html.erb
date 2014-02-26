@@ -1,0 +1,47 @@
+<li class="<%= cycle 'odd', 'even', :name => 'listing_locations' %> location_<%= location_counter %> <%= 'contractor' if location.delivery_via_contractor %> <%= 'spot' if location.delivery_via_spot %>" data-id="<%= location.id %>" data-name="<%= location.vendor.name %>" data-lat="<%= location.address.lat %>" data-lng="<%= location.address.lng %>">
+  <%= link_to "location_#{location_counter}" do %>
+    <% if location.vendor.logo_image.present? %>
+      <%= image_tag location.vendor.logo_image.thumb('60x60#').url %>
+    <% else %>
+      <img src='/assets/img_default_logo.png'/>
+    <% end %>
+  <% end %>
+  <div class="details">
+    <strong><%= yellow_highlight location.vendor.name, @q %></strong>
+    <br/>
+    <%= location.address.street1 %><br/>
+    <%= location.address.city %>, <%= location.address.state %>, <%= location.address.zip %><br/>
+    <%= matching_tag(location, @q) %>
+    <%= matching_menu_item_links(location, @q, @delivery_type) %>
+
+    <div class="distance">
+      <%= sprintf("%.1f", location.distance_from(@coordinates)) + ' miles away' if @coordinates.present? %>, 
+      <%= link_to "View Menu »", menus_location_path(location, type: @delivery_type), remote: true, :class => 'should_open_menu_overlay_when_clicked' -%>
+    </div>
+
+  </div>
+  <a class="main_link" href="location_<%= location_counter %>">Link</a>
+  <div class="clear"></div>
+  <div class="marker_info" style="display: none;">
+    <div id='info_window'>
+      <div class="location_info">
+        <%= link_to '#' do %>
+          <% if location.vendor.logo_image.present? %>
+            <%= image_tag location.vendor.logo_image.thumb('60x60#').url %>
+          <% else %>
+            <img src='/assets/img_default_logo.png'/>
+          <% end %>
+        <% end %>
+        <div class='details'>
+          <strong><%= location.vendor.name %></strong><br/>
+          <%= location.address.street1 %><br/>
+          <%= location.address.city %>, <%= location.address.state %> <%= location.address.zip %>
+        </div>
+        <div class='clear'></div>
+      </div>
+      <div class='order_btns'>
+        <%= menus_link(location, @delivery_type) %>
+      </div>
+    </div>
+  </div>
+</li>

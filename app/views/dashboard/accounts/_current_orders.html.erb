@@ -1,0 +1,90 @@
+<table id="in_process" <%= current_user.geometry_data %> >
+  <thead>
+    <tr>
+      <th width="15%">Status</th>
+      <th width="15%">Order</th>
+      <th width="30%">Order Details</th>
+      <th width="10%">Total</th>
+      <th width="20%"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% current_user.orders.active.ascending.each do |order| %>
+      <tr data-id="<%= order.id %>" <%= order.delivery_data %> >
+        <td><div class="<%= order.state.gsub(/_/, ' ') %>"><span></span>
+            <%= order.state.gsub(/_/, ' ').capitalize %></div>
+            <br>
+            <div style="font-size: 10px"><%= order.state_description %></div>
+        </td>
+        <td>
+          <%= order.location_name %><br />
+          Order #<%= order.id %><br /><br />
+          Placed at:<br />
+          <span><%= order.submitted_at.in_time_zone(current_user.time_zone).strftime '%m/%d/%y' %></span><br/>
+          <%= order.submitted_at.in_time_zone(current_user.time_zone).strftime '%l:%M %P' %>
+        </td>
+        <td>
+          <ul>
+            <%= order.custom_order_body %>
+          </ul>
+        </td>
+        <td><%= number_to_currency order.total %> 
+	        <% if order.actual_cost.blank? -%>
+            <font style="font-size: 10px">(Approx. cost w/ delivery fee)</font>
+          <% else %>
+            <font style="font-size: 10px">(This is the final cost - which includes the <%= number_to_currency order.delivery_fee %> delivery fee)</font>
+          <% end %>
+        </td>
+        <td align="right">
+          <% if order.submitted? || order.confirmed? %>
+            <%= link_to "Edit", dashboard_order_user_edit_path(order), remote: true, :class=>'btn_small grey' %> 
+            <%= link_to "Cancel", dashboard_order_user_cancel_path(order), remote: true, method: :post, confirm: "Are you sure you want to cancel this order?", :class=>'btn_small grey' %>
+          <% else %>
+	          <% if order.receipt_image_uid.present? %>
+						  <a class="lightbox" href="#bigger_r">Receipt: <img src="<%= order.receipt_image.thumb('50x50>').url %>" /></a>
+					
+						  <div id="bigger_r" style="display:none"><img src="<%= order.receipt_image.thumb('800x800>').url %>" /></div>
+						  <br /><br />
+						<% end -%>
+
+          <% end %>
+  
+     <!-- this can be updated with Delivery Contractor info
+          <div style="font-size: 10px; margin-top: 10px;">
+	          <b>Note:</b> You can call  ... to check on the status of your order.
+	        </div>
+	    -->
+	    <br /><br />
+      <%= link_to "Message Your Courier", dashboard_order_user_message_path(order), remote: true, :class=>'btn_small grey' %> 
+	      
+	
+        </td>
+        <td class="info" style="display: none;">
+          <div id="info-window">
+            <h1><%= order.location_name %> - Order #<%= order.id %></h1>
+            <% if order.on_delivery_at.present? %>
+              <p>
+                Departed at: <%= order.on_delivery_at.strftime "%I:%M %p" %>
+              </p>
+            <% end %>
+          </div>
+        </td>
+        <td class="spot" style="display: none;">
+          <div id="info-window">
+            <h1><%= order.location_name %> - Order #<%= order.id %></h1>
+            <p><%= number_to_currency (order.approx_cost.to_f / 100.00) %></p>
+            <p>
+              (<%= number_with_precision order.delivery_spot.lat, precision: 4 %>, 
+              <%= number_with_precision order.delivery_spot.lng, precision: 4 %>)<br />
+              <% if order.delivery_spot.use_reverse? %>
+                <%= order.delivery_spot.reverse_address %>
+              <% else %>
+                <%= order.delivery_spot.address %>
+              <% end %>
+            </p>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,828 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<omf uuid="20ee53fe-15bb-11e0-b40e-0018512e6b26" date_created="2010-03-25" accuracy="5">
+<openmenu>
+<version>1.5</version>
+<crosswalks>
+<crosswalk>
+<crosswalk_id>31b8bfbf-08a3-478f-a4a4-d3e3143a37fb</crosswalk_id>
+<crosswalk_company>Factual</crosswalk_company>
+<crosswalk_url>http://factual.com/31b8bfbf-08a3-478f-a4a4-d3e3143a37fb</crosswalk_url>
+</crosswalk>
+</crosswalks>
+</openmenu>
+<restaurant_info>
+<restaurant_name>Metropolitan Grill</restaurant_name>
+<business_type>independent</business_type>
+<brief_description></brief_description>
+<full_description></full_description>
+<location_id></location_id>
+<longitude>-122.334019</longitude>
+<latitude>47.603861</latitude>
+<utc_offset></utc_offset>
+<address_1>820 Second Ave.</address_1>
+<address_2>(Marion St.)</address_2>
+<city_town>Seattle</city_town>
+<state_province>WA</state_province>
+<postal_code>98104</postal_code>
+<country>US</country>
+<region_area></region_area>
+<phone>206-624-3287</phone>
+<fax>389-0042</fax>
+<website_url>http://www.themetropolitangrill.com</website_url>
+<omf_file_url>http://openmenu.com/menu/20ee53fe-15bb-11e0-b40e-0018512e6b26</omf_file_url>
+<logo_urls>
+</logo_urls>
+<environment>
+<seating_qty></seating_qty>
+<max_group_size></max_group_size>
+<age_level_preference></age_level_preference>
+<smoking_allowed></smoking_allowed>
+<takeout_available></takeout_available>
+<delivery_available radius="" fee=""></delivery_available>
+<catering_available></catering_available>
+<reservations></reservations>
+<alcohol_type></alcohol_type>
+<music_type></music_type>
+<pets_allowed></pets_allowed>
+<wheelchair_accessible></wheelchair_accessible>
+<dress_code>Upscale Casual</dress_code>
+<cuisine_type_primary>Steakhouse</cuisine_type_primary>
+<cuisine_type_secondary></cuisine_type_secondary>
+<seating_locations>
+</seating_locations>
+<accepted_currencies>
+</accepted_currencies>
+<online_reservations>
+</online_reservations>
+<online_ordering>
+</online_ordering>
+<operating_days>
+<operating_day>
+<day_of_week>1</day_of_week>
+<open_time>11:00</open_time>
+<close_time>22:30</close_time>
+</operating_day>
+<operating_day>
+<day_of_week>2</day_of_week>
+<open_time>11:00</open_time>
+<close_time>22:30</close_time>
+</operating_day>
+<operating_day>
+<day_of_week>3</day_of_week>
+<open_time>11:00</open_time>
+<close_time>22:30</close_time>
+</operating_day>
+<operating_day>
+<day_of_week>4</day_of_week>
+<open_time>11:00</open_time>
+<close_time>22:30</close_time>
+</operating_day>
+<operating_day>
+<day_of_week>5</day_of_week>
+<open_time>11:00</open_time>
+<close_time>23:00</close_time>
+</operating_day>
+<operating_day>
+<day_of_week>6</day_of_week>
+<open_time>16:00</open_time>
+<close_time>23:00</close_time>
+</operating_day>
+<operating_day>
+<day_of_week>7</day_of_week>
+<open_time>16:00</open_time>
+<close_time>22:00</close_time>
+</operating_day>
+</operating_days>
+<parking></parking>
+</environment>
+<contacts>
+</contacts>
+<parent_company>
+<parent_company_name></parent_company_name>
+<parent_company_website></parent_company_website>
+<address_1></address_1>
+<address_2></address_2>
+<city_town></city_town>
+<state_province></state_province>
+<postal_code></postal_code>
+<country></country>
+<phone></phone>
+<fax></fax>
+</parent_company>
+</restaurant_info>
+<menus>
+<menu name="LUNCH MENU" currency_symbol="" uid="14635">
+<menu_description></menu_description>
+<menu_duration>
+<menu_duration_name></menu_duration_name>
+<menu_duration_time_start></menu_duration_time_start>
+<menu_duration_time_end></menu_duration_time_end>
+</menu_duration>
+<menu_groups>
+<menu_group name="APPETIZERS" uid="121367">
+<menu_group_description></menu_group_description>
+<menu_items>
+<menu_item uid="814759">
+<menu_item_name>Artichoke Hearts</menu_item_name>
+<menu_item_description>Grain mustard aïoli.</menu_item_description>
+<menu_item_price>9.95</menu_item_price>
+</menu_item>
+<menu_item uid="814760">
+<menu_item_name>Teriyaki Tenderloin Bites*</menu_item_name>
+<menu_item_description>Slices of filet mignon pan seared with orange, soy, ginger and brown sugar.</menu_item_description>
+<menu_item_price>12.95</menu_item_price>
+</menu_item>
+<menu_item uid="814761">
+<menu_item_name>Dungeness Crab Cakes</menu_item_name>
+<menu_item_description>Pear–jicama slaw, sweet and sour vinaigrette, sweet chili beurre blanc.</menu_item_description>
+<menu_item_price>15.95</menu_item_price>
+</menu_item>
+<menu_item uid="814762">
+<menu_item_name>Calamari</menu_item_name>
+<menu_item_description>Tomato–basil relish, saffron–roasted red pepper aïoli.</menu_item_description>
+<menu_item_price>11.95</menu_item_price>
+</menu_item>
+</menu_items>
+</menu_group>
+<menu_group name="SOUPS AND STARTER SALADS" uid="121368">
+<menu_group_description></menu_group_description>
+<menu_items>
+<menu_item uid="814763">
+<menu_item_name>House Greens</menu_item_name>
+<menu_item_description>Organic field greens, Anjou pears, Gorgonzola and candied walnuts tossed in rosemary and stone ground mustard vinaigrette.</menu_item_description>
+<menu_item_price>5.95</menu_item_price>
+</menu_item>
+<menu_item uid="814764">
+<menu_item_name>Romaine and Oegon
+Blue Cheese Salad</menu_item_name>
+<menu_item_description>Crisp romaine tossed with chopped egg, toasted hazelnuts and our own blue cheese dressing.</menu_item_description>
+<menu_item_price>5.95</menu_item_price>
+</menu_item>
+<menu_item uid="814765">
+<menu_item_name>Classic Caesar Salad</menu_item_name>
+<menu_item_description>Crisp hand cut hearts of romaine, garlic Parmesan croutons and shredded Parmesan cheese tossed in housemade Caesar dressing. Served with Spanish white anchovies.</menu_item_description>
+<menu_item_price>6.50</menu_item_price>
+</menu_item>
+<menu_item uid="814766">
+<menu_item_name>Spinach Salad</menu_item_name>
+<menu_item_description>Organic baby spinach, mushrooms, toasted almonds, crispy bacon and Jack cheese tossed in a honey mustard dressing.</menu_item_description>
+<menu_item_price>5.50</menu_item_price>
+</menu_item>
+<menu_item uid="814767">
+<menu_item_name>Pea Salad</menu_item_name>
+<menu_item_description>Petite peas, bacon, onion and water chestnuts in a peppered sour cream dressing.</menu_item_description>
+<menu_item_price>4.50</menu_item_price>
+</menu_item>
+<menu_item uid="814768">
+<menu_item_name>Metropolitan Clam Chowder</menu_item_name>
+<menu_item_description>Traditional New England style clam chowder.</menu_item_description>
+<menu_item_price>8.95</menu_item_price>
+</menu_item>
+<menu_item uid="814769">
+<menu_item_name>Soup of the Day</menu_item_name>
+<menu_item_description> | Monday: | Tuesday: | Wednesday: | Thursday: | Friday:</menu_item_description>
+<menu_item_price>7.95</menu_item_price>
+</menu_item>
+</menu_items>
+</menu_group>
+<menu_group name="ENTREE SALADS" uid="121369">
+<menu_group_description></menu_group_description>
+<menu_items>
+<menu_item uid="814770">
+<menu_item_name>Classic Chop Chop Salad</menu_item_name>
+<menu_item_description>Hand cut romaine hearts with smoked turkey breast, salami, garbanzo beans, diced tomatoes and Parmesan cheese tossed in balsamic vinaigrette.</menu_item_description>
+<menu_item_price>13.95</menu_item_price>
+</menu_item>
+<menu_item uid="814771">
+<menu_item_name>Spinach Salad with Smoked Salmon</menu_item_name>
+<menu_item_description>House hot smoked wild Pacific king salmon served over our organic baby spinach salad.</menu_item_description>
+<menu_item_price>15.95</menu_item_price>
+</menu_item>
+<menu_item uid="814772">
+<menu_item_name>Chicken Waldorf Salad</menu_item_name>
+<menu_item_description>Chopped romaine, herb grilled chicken breast, Granny Smith and Gala apples, candied walnuts, celery and jicama tossed with creamy citrus vinaigrette.</menu_item_description>
+<menu_item_price>13.95</menu_item_price>
+</menu_item>
+<menu_item uid="814773">
+<menu_item_name>Metropolitan Grill Steak Salad*</menu_item_name>
+<menu_item_description>Grilled prime top sirloin sliced on organic greens with Roquefort sauce and shallot–red wine vinaigrette.</menu_item_description>
+<menu_item_price>17.95</menu_item_price>
+</menu_item>
+<menu_item uid="814774">
+<menu_item_name>Metropolitan Cobb Salad</menu_item_name>
+<menu_item_description>Herb roasted chicken breast, avocado, tomato, bacon, Oregon blue cheese crumbles, black olives, chopped egg, stone ground mustard and rosemary vinaigrette.</menu_item_description>
+<menu_item_price>14.95</menu_item_price>
+</menu_item>
+</menu_items>
+</menu_group>
+<menu_group name="LUNCH COMBINATIONS" uid="121370">
+<menu_group_description></menu_group_description>
+<menu_items>
+<menu_item uid="814775">
+<menu_item_name>Soup and Salad</menu_item_name>
+<menu_item_description></menu_item_description>
+<menu_item_price>10.95</menu_item_price>
+</menu_item>
+<menu_item uid="814776">
+<menu_item_name>Half Sandwich with Soup or Salad</menu_item_name>
+<menu_item_description></menu_item_description>
+<menu_item_price>12.95</menu_item_price>
+</menu_item>
+<menu_item uid="814777">
+<menu_item_name>Half Sandwich with Soup and Salad</menu_item_name>
+<menu_item_description></menu_item_description>
+<menu_item_price>14.95</menu_item_price>
+</menu_item>
+<menu_item uid="814778">
+<menu_item_name>SALAD CHOICES</menu_item_name>
+<menu_item_description> | Seasonal Greens | Caesar Salad | Blue Cheese Salad</menu_item_description>
+<menu_item_price></menu_item_price>
+</menu_item>
+<menu_item uid="814779">
+<menu_item_name>SOUP CHOICES</menu_item_name>
+<menu_item_description> | Soup of the Day | Clam Chowder</menu_item_description>
+<menu_item_price></menu_item_price>
+</menu_item>
+<menu_item uid="814780">
+<menu_item_name>SANDWICH CHOICES</menu_item_name>
+<menu_item_description> | Roast Beef au Jus | Clubhouse</menu_item_description>
+<menu_item_price></menu_item_price>
+</menu_item>
+</menu_items>
+</menu_group>
+<menu_group name="THE BEST STEAK IN TOWN" uid="121371">
+<menu_group_description></menu_group_description>
+<menu_items>
+<menu_item uid="814781">
+<menu_item_name>Prime New York*</menu_item_name>
+<menu_item_description>With crispy fried onions and herbed au jus.</menu_item_description>
+<menu_item_price></menu_item_price>
+</menu_item>
+<menu_item uid="814782">
+<menu_item_name>Prime Top Sirloin*</menu_item_name>
+<menu_item_description>With maître d’ butter.</menu_item_description>
+<menu_item_price></menu_item_price>
+</menu_item>
+<menu_item uid="814783">
+<menu_item_name>Filet Mignon*</menu_item_name>
+<menu_item_description>With jumbo mushroom cap and herb au jus.</menu_item_description>
+<menu_item_price></menu_item_price>
+</menu_item>
+<menu_item uid="814784">
+<menu_item_name>Prime New York Peppercorn Steak*</menu_item_name>
+<menu_item_description>Crusted with cracked black pepper. Topped with green peppercorn demi–glace.</menu_item_description>
+<menu_item_price></menu_item_price>
+</menu_item>
+</menu_items>
+</menu_group>
+<menu_group name="SANDWICHES" uid="121372">
+<menu_group_description></menu_group_description>
+<menu_items>
+<menu_item uid="814785">
+<menu_item_name>Grilled Chicken Sandwich
+with Bacon and Brie</menu_item_name>
+<menu_item_description>Mesquite grilled herb marinated chicken breast topped with crisp bacon and double cream Brie cheese. Served on a corn Kaiser with herb mayonnaise, lettuce and tomato.</menu_item_description>
+<menu_item_price>11.95</menu_item_price>
+</menu_item>
+<menu_item uid="814786">
+<menu_item_name>Prime New York
+Steak Sandwich*</menu_item_name>
+<menu_item_description>Grilled and sliced. Served open– faced on French baguette with caramelized onions, sautéed mushrooms and sharp provolone cheese.</menu_item_description>
+<menu_item_price>16.95</menu_item_price>
+</menu_item>
+<menu_item uid="814787">
+<menu_item_name>Turkey Clubhouse Sandwich</menu_item_name>
+<menu_item_description>Roasted turkey, Havarti cheese, crispy bacon, lettuce and tomato. Served with housemade potato chips.</menu_item_description>
+<menu_item_price>9.95</menu_item_price>
+</menu_item>
+<menu_item uid="814788">
+<menu_item_name>Roast Beef au Jus*</menu_item_name>
+<menu_item_description>Thinly sliced and served on a fresh baguette with melted cheddar cheese, caramelized onions and herbed rondelé cream cheese.</menu_item_description>
+<menu_item_price>12.95</menu_item_price>
+</menu_item>
+<menu_item uid="814789">
+<menu_item_name>The “Kobe Beef” Works Burger</menu_item_name>
+<menu_item_description>Grilled Kobe sirloin, melted cheddar and Swiss cheese, caramelized onions, housemade Thousand Island dressing, lettuce and tomato.</menu_item_description>
+<menu_item_price>13.95</menu_item_price>
+</menu_item>
+</menu_items>
+</menu_group>
+<menu_group name="MET LUNCH SPECIALTIES" uid="121373">
+<menu_group_description></menu_group_description>
+<menu_items>
+<menu_item uid="814790">
+<menu_item_name>Dungeness Crab Cakes</menu_item_name>
+<menu_item_description>Pear–jicama slaw, sweet and sour vinaigrette, sweet chili beurre blanc.</menu_item_description>
+<menu_item_price>16.95</menu_item_price>
+</menu_item>
+<menu_item uid="814791">
+<menu_item_name>Jambalaya Fettuccine</menu_item_name>
+<menu_item_description>Very spicy. Fresh chicken breast, andouille sausage, tiger prawns and egg fettuccine simmered in a rich and spicy housemade Cajun style tomato sauce. Garnished with shredded Parmesan.</menu_item_description>
+<menu_item_price>15.95</menu_item_price>
+</menu_item>
+<menu_item uid="814792">
+<menu_item_name>Kobe Ground Sirloin*</menu_item_name>
+<menu_item_description>12–ounce Kobe beef ground sirloin grilled over mesquite and served with bacon and mushroom pan gravy, mashed potatoes, seasonal vegetables and a crispy onion ring.</menu_item_description>
+<menu_item_price>17.95</menu_item_price>
+</menu_item>
+<menu_item uid="814793">
+<menu_item_name>The Metropolitan Mushroom Steak*</menu_item_name>
+<menu_item_description>Marinated with balsamic vinegar, garlic, shallots and rosemary, grilled over mesquite and topped with sautéed petite mushroom caps. Served with mashed potatoes and seasonal vegetables.</menu_item_description>
+<menu_item_price>18.95</menu_item_price>
+</menu_item>
+<menu_item uid="814794">
+<menu_item_name>Parmesan Crusted Chicken Dijon</menu_item_name>
+<menu_item_description>Dijon and herb seasoned chicken breast, crusted with Parmesan and Japanese bread crumbs. Served with Dijon dipping sauce, steamed vegetables and mashed potatoes.</menu_item_description>
+<menu_item_price>14.95</menu_item_price>
+</menu_item>
+<menu_item uid="814795">
+<menu_item_name>Friday Special: Prime Rib*</menu_item_name>
+<menu_item_description>Slow roasting resulting in the most tender, juicy and flavorful prime rib. Served with mashed potatoes, seasonal vegetables and jus.</menu_item_description>
+<menu_item_price>23.95</menu_item_price>
+</menu_item>
+</menu_items>
+</menu_group>
+<menu_group name="CLASSIC BEVERAGES" uid="121374">
+<menu_group_description></menu_group_description>
+<menu_items>
+<menu_item uid="814796">
+<menu_item_name>Henry Weinhard’s Root Beer or Orange Cream Float</menu_item_name>
+<menu_item_description>A fantastic combination of our premium bourbon vanilla ice cream and Henry Weinhard’s Premium Draught Style Root Beer or Orange Cream Soda.</menu_item_description>
+<menu_item_price>4.50</menu_item_price>
+</menu_item>
+<menu_item uid="814797">
+<menu_item_name>Tobin’s Trio</menu_item_name>
+<menu_item_description>IZZE sparkling apple juice, cranberry juice and fresh lime wedges, muddled together for a light, refreshing beverage sensation.</menu_item_description>
+<menu_item_price>5.95</menu_item_price>
+</menu_item>
+<menu_item uid="814798">
+<menu_item_name>Morning Mai Tai</menu_item_name>
+<menu_item_description>Fresh orange juice, Hawaiian pineapple juice and strawberries mixed with lemon, lime and coconut crème to bring a tropical sensation to your taste buds.</menu_item_description>
+<menu_item_price>5.95</menu_item_price>
+</menu_item>
+<menu_item uid="814799">
+<menu_item_name>Red Bull Razmatazz</menu_item_name>
+<menu_item_description>Red Bull power energy drink, fresh raspberries and a splash of simple syrup, muddled with ice and served in a martini glass for Seattle’s power players.</menu_item_description>
+<menu_item_price>5.95</menu_item_price>
+</menu_item>
+</menu_items>
+</menu_group>
+<menu_group name="SAMPLE BLACKBOARD SPECIALS" uid="121375">
+<menu_group_description></menu_group_description>
+<menu_items>
+<menu_item uid="814800">
+<menu_item_name>COPPER RIVER KING SALMON*</menu_item_name>
+<menu_item_description>This famous king of all kings is simply basted with lemon, vermouth and garlic and grilled over mesquite to impart a subtle, sweet and smoky flavor. Served with four grain pilaf, grilled Washington asparagus and tomato salad and topped with artichoke tartar.</menu_item_description>
+<menu_item_price></menu_item_price>
+</menu_item>
+<menu_item uid="814801">
+<menu_item_name>THE GRINDER</menu_item_name>
+<menu_item_description>A soft baguette piled high with salami, pepperoni, coppa, black forest ham, provolone, pepperoncini, roasted red pepper, black olives, sliced red onion, organic mixed greens and saffron aïoli.</menu_item_description>
+<menu_item_price>10.95</menu_item_price>
+</menu_item>
+<menu_item uid="814802">
+<menu_item_name>MACADAMIA CRUSTED HALIBUT CHEEKS</menu_item_name>
+<menu_item_description>Halibut cheeks crusted with macadamia nuts and Parmesan cheese. Flash seared golden and served with Cabernet reduction, butter sauce, mashed potatoes and asparagus spears.</menu_item_description>
+<menu_item_price>16.95</menu_item_price>
+</menu_item>
+<menu_item uid="814803">
+<menu_item_name>FISH &amp; CHIPS</menu_item_name>
+<menu_item_description>Fresh lingcod dipped in Redhook beer batter and crusted with Japanese bread crumbs. Served with coleslaw and housemade tartar sauce.</menu_item_description>
+<menu_item_price>13.95</menu_item_price>
+</menu_item>
+<menu_item uid="814804">
+<menu_item_name>PROSCIUTTO WRAPPED SCALLOPS</menu_item_name>
+<menu_item_description>Alaskan weathervane scallops wrapped in prosciutto and seared golden, served with spicy bordetto sauce, orzo pasta and organic greens with balsamic vinaigrette. Topped with saffron aïoli.</menu_item_description>
+<menu_item_price>17.95</menu_item_price>
+</menu_item>
+<menu_item uid="814805">
+<menu_item_name>MESQUITE GRILLED COPPER RIVER SEAFOOD SALAD*</menu_item_name>
+<menu_item_description>Mesquite grilled Copper River sockeye salmon, black tiger prawns and fresh Dungeness crab salad tossed with organic field greens, avocado, hard–boiled egg and housemade Louie style dressing.</menu_item_description>
+<menu_item_price>22.95</menu_item_price>
+</menu_item>
+<menu_item uid="814806">
+<menu_item_name>SOUTHWESTERN SKIRT STEAK</menu_item_name>
+<menu_item_description>Marinated with lime, brown sugar, oregano, cayenne pepper and BBQ spices, grilled over mesquite and served with roasted corn mashed potatoes, avocado tomatillo salsa and lime sour cream.</menu_item_description>
+<menu_item_price>15.95</menu_item_price>
+</menu_item>
+<menu_item uid="814807">
+<menu_item_name>BRONZED YELLOWFIN AHI*</menu_item_name>
+<menu_item_description>Seared rare and served with avocado, fresh roma tomato and frisée. Topped with a warm sherry vinaigrette and finished with tomatillo sauce and balsamic syrup.</menu_item_description>
+<menu_item_price>17.95</menu_item_price>
+</menu_item>
+<menu_item uid="814808">
+<menu_item_name>ALASKAN HALIBUT WITH SMOKED BACON, ASPARAGUS AND MOREL MUSHROOMS</menu_item_name>
+<menu_item_description>Fresh halibut filet pan seared golden and served with garlic mashed potatoes, local asparagus spears, morel mushrooms and brunoise vegetable ragoût. Finished with truffled basil pesto.</menu_item_description>
+<menu_item_price>22.95</menu_item_price>
+</menu_item>
+<menu_item uid="814809">
+<menu_item_name>PEPPERCORN CRUSTED BLUE CHEESE AND BACON KOBE BURGER*</menu_item_name>
+<menu_item_description>Half pound Kobe burger crusted with cracked black peppercorns and grilled over mesquite. Topped with Oregon blue cheese and crispy bacon. Served on a corn kaiser roll with diamond cut fries.</menu_item_description>
+<menu_item_price>13.95</menu_item_price>
+</menu_item>
+<menu_item uid="814810">
+<menu_item_name>THAI FISH TACOS*</menu_item_name>
+<menu_item_description>A selection of our daily fresh fish marinated in lime, soy and chili garlic paste. Grilled over mesquite and served with warm flour tortillas, iceberg lettuce, tomato, basil, Monterey Jack and Thai sweet chili sauce.</menu_item_description>
+<menu_item_price>14.95</menu_item_price>
+</menu_item>
+<menu_item uid="814811">
+<menu_item_name>BAKED COPPER RIVER SALMON MACARONI AND CHEESE</menu_item_name>
+<menu_item_description>Copper River salmon tossed with lobster cream, cheddar, Jack and Parmesan cheese and baked golden.</menu_item_description>
+<menu_item_price>15.95</menu_item_price>
+</menu_item>
+</menu_items>
+</menu_group>
+</menu_groups>
+</menu>
+<menu name="DINNER MENU" currency_symbol="" uid="14636">
+<menu_description></menu_description>
+<menu_duration>
+<menu_duration_name></menu_duration_name>
+<menu_duration_time_start></menu_duration_time_start>
+<menu_duration_time_end></menu_duration_time_end>
+</menu_duration>
+<menu_groups>
+<menu_group name="APPETIZERS" uid="121376">
+<menu_group_description></menu_group_description>
+<menu_items>
+<menu_item uid="814812">
+<menu_item_name>Dungeness Crab Cakes</menu_item_name>
+<menu_item_description>Pear–jicama slaw, sweet and sour vinaigrette, sweet chili beurre blanc.</menu_item_description>
+<menu_item_price>15.95</menu_item_price>
+</menu_item>
+<menu_item uid="814813">
+<menu_item_name>Giant Prawn Martini</menu_item_name>
+<menu_item_description>Spicy cocktail sauce, brunoise vegetables, lemon.</menu_item_description>
+<menu_item_price>17.95</menu_item_price>
+</menu_item>
+<menu_item uid="814814">
+<menu_item_name>Raw Oysters on the Half Shell*</menu_item_name>
+<menu_item_description>Cucumber–basil mignonette.</menu_item_description>
+<menu_item_price>12.95</menu_item_price>
+</menu_item>
+<menu_item uid="814815">
+<menu_item_name>Thick Cut Onion Rings</menu_item_name>
+<menu_item_description>Housemade with spicy ketchup.</menu_item_description>
+<menu_item_price>10.95</menu_item_price>
+</menu_item>
+<menu_item uid="814816">
+<menu_item_name>Teriyaki Tenderloin Bites*</menu_item_name>
+<menu_item_description>Slices of filet mignon pan seared with orange, soy, ginger and brown sugar.</menu_item_description>
+<menu_item_price>12.95</menu_item_price>
+</menu_item>
+<menu_item uid="814817">
+<menu_item_name>Calamari</menu_item_name>
+<menu_item_description>Tomato–basil relish, saffron–roasted red pepper aïoli.</menu_item_description>
+<menu_item_price>11.95</menu_item_price>
+</menu_item>
+<menu_item uid="814818">
+<menu_item_name>Artichoke Hearts</menu_item_name>
+<menu_item_description>Grain mustard aïoli.</menu_item_description>
+<menu_item_price>9.95</menu_item_price>
+</menu_item>
+<menu_item uid="814819">
+<menu_item_name>Dungeness Crab Cocktail</menu_item_name>
+<menu_item_description>Classic cocktail sauce.</menu_item_description>
+<menu_item_price>16.95</menu_item_price>
+</menu_item>
+<menu_item uid="814820">
+<menu_item_name>Seafood Sampler*</menu_item_name>
+<menu_item_description>Giant tiger prawns, Dungeness crab claws, raw oysters on the half shell, Alaskan scallops and chilled Maine lobster.</menu_item_description>
+<menu_item_price>59.95</menu_item_price>
+</menu_item>
+</menu_items>
+</menu_group>
+<menu_group name="SOUPS AND STARTER SALADS" uid="121377">
+<menu_group_description></menu_group_description>
+<menu_items>
+<menu_item uid="814821">
+<menu_item_name>Iceberg Wedge Salad
+with Oregon Blue Cheese</menu_item_name>
+<menu_item_description>Crisp iceberg lettuce, Gala apples, diced tomatoes, pistachio nuts and pancetta bacon.</menu_item_description>
+<menu_item_price>9.95</menu_item_price>
+</menu_item>
+<menu_item uid="814822">
+<menu_item_name>Spinach Salad</menu_item_name>
+<menu_item_description>Organic baby spinach, mushrooms, toasted almonds, crispy bacon and Jack cheese tossed in a honey mustard dressing.</menu_item_description>
+<menu_item_price>7.95</menu_item_price>
+</menu_item>
+<menu_item uid="814823">
+<menu_item_name>Clam Chowder</menu_item_name>
+<menu_item_description>Traditional New England style clam chowder with sherry cream.</menu_item_description>
+<menu_item_price>7.95</menu_item_price>
+</menu_item>
+<menu_item uid="814824">
+<menu_item_name>Maine Lobster Bisque</menu_item_name>
+<menu_item_description>Rich lobster stock combined with Cognac and heavy cream.</menu_item_description>
+<menu_item_price>8.95</menu_item_price>
+</menu_item>
+<menu_item uid="814825">
+<menu_item_name>House Greens</menu_item_name>
+<menu_item_description>Organic field greens, Anjou pears, Gorgonzola and candied walnuts tossed in rosemary and stone ground mustard vinaigrette.</menu_item_description>
+<menu_item_price>7.95</menu_item_price>
+</menu_item>
+<menu_item uid="814826">
+<menu_item_name>Classic Caesar</menu_item_name>
+<menu_item_description>Crisp hand cut hearts of romaine, garlic Parmesan croutons and shredded Parmesan cheese tossed in housemade Caesar dressing. Served with Spanish white anchovies.</menu_item_description>
+<menu_item_price>8.95</menu_item_price>
+</menu_item>
+<menu_item uid="814827">
+<menu_item_name>French Onion Soup with
+Swiss Emmentaler</menu_item_name>
+<menu_item_description>Caramelized and slow simmered onions, beef broth, brandy and toasted croutons.</menu_item_description>
+<menu_item_price>8.95</menu_item_price>
+</menu_item>
+</menu_items>
+</menu_group>
+<menu_group name="DINNER SPECIALTIES" uid="121378">
+<menu_group_description></menu_group_description>
+<menu_items>
+<menu_item uid="814828">
+<menu_item_name>Gorgonzola and
+Spinach Stuffed Chicken</menu_item_name>
+<menu_item_description>Fresh herb and lemon marinated chicken breast stuffed with mozzarella and Gorgonzola cheeses, spinach and garlic. Oven roasted and served with creamy fettuccine, tomato–basil relish and lemon–butter sauce.</menu_item_description>
+<menu_item_price>26.95</menu_item_price>
+</menu_item>
+<menu_item uid="814829">
+<menu_item_name>Grilled Portobello Mushrooms</menu_item_name>
+<menu_item_description>Served with Metropolitan mashed potatoes, creamed spinach, market vegetables and vegetable demi–glace.</menu_item_description>
+<menu_item_price>20.95</menu_item_price>
+</menu_item>
+<menu_item uid="814830">
+<menu_item_name>Jumbo Prawn Scampi</menu_item_name>
+<menu_item_description>Tiger prawns, butterflied and roasted in shell with lemon garlic butter. Served with fettuccine Alfredo.</menu_item_description>
+<menu_item_price>39.95</menu_item_price>
+</menu_item>
+<menu_item uid="814831">
+<menu_item_name>Australian Lobster Tail</menu_item_name>
+<menu_item_description>Served with drawn butter and lemon. Choice of baked potato, Metropolitan mashed potatoes or steak fries.</menu_item_description>
+<menu_item_price></menu_item_price>
+</menu_item>
+<menu_item uid="814832">
+<menu_item_name>Metropolitan Grill Steak Salad*</menu_item_name>
+<menu_item_description>Mesquite grilled nine–ounce prime top sirloin sliced and served over organic greens with Roquefort sauce, caramelized onions, diced tomatoes, Oregon blue cheese crumbles and shallot–red wine vinaigrette.</menu_item_description>
+<menu_item_price>27.95</menu_item_price>
+</menu_item>
+<menu_item uid="814833">
+<menu_item_name>Dungeness Crab Fettuccine</menu_item_name>
+<menu_item_description>Dungeness crab and mushrooms tossed with Marsala, roasted garlic and creamy Alfredo sauce.</menu_item_description>
+<menu_item_price>35.95</menu_item_price>
+</menu_item>
+</menu_items>
+</menu_group>
+<menu_group name="THE BEST STEAK IN TOWN" uid="121379">
+<menu_group_description></menu_group_description>
+<menu_items>
+<menu_item uid="814834">
+<menu_item_name>Prime New York Strip Loin*</menu_item_name>
+<menu_item_description>With crispy fried onions and herbed au jus.</menu_item_description>
+<menu_item_price></menu_item_price>
+</menu_item>
+<menu_item uid="814835">
+<menu_item_name>Prime Top Sirloin*</menu_item_name>
+<menu_item_description>With maître d’ butter.</menu_item_description>
+<menu_item_price></menu_item_price>
+</menu_item>
+<menu_item uid="814836">
+<menu_item_name>Filet Mignon*</menu_item_name>
+<menu_item_description>With jumbo mushroom cap and herb au jus.</menu_item_description>
+<menu_item_price></menu_item_price>
+</menu_item>
+<menu_item uid="814837">
+<menu_item_name>Prime New York Peppercorn Steak*</menu_item_name>
+<menu_item_description>Crusted with cracked black pepper. Topped with green peppercorn demi–glace.</menu_item_description>
+<menu_item_price></menu_item_price>
+</menu_item>
+</menu_items>
+</menu_group>
+<menu_group name="PRIME RIB" uid="121380">
+<menu_group_description></menu_group_description>
+<menu_items>
+<menu_item uid="814838">
+<menu_item_name>Prime Rib*</menu_item_name>
+<menu_item_description>Served with shredded fresh horseradish and au jus.</menu_item_description>
+<menu_item_price></menu_item_price>
+</menu_item>
+<menu_item uid="814839">
+<menu_item_name>Blackened Prime Rib*</menu_item_name>
+<menu_item_description>Cajun crusted and pan seared.</menu_item_description>
+<menu_item_price></menu_item_price>
+</menu_item>
+</menu_items>
+</menu_group>
+<menu_group name="SPECIALTY CUTS" uid="121381">
+<menu_group_description></menu_group_description>
+<menu_items>
+<menu_item uid="814840">
+<menu_item_name>Prime Delmonico*</menu_item_name>
+<menu_item_description>Served with crispy fried onions and herbed au jus.</menu_item_description>
+<menu_item_price>54.95</menu_item_price>
+</menu_item>
+<menu_item uid="814841">
+<menu_item_name>Bacon Wrapped
+Double Pork Chops*</menu_item_name>
+<menu_item_description>Marinated in Dijon mustard, red wine vinegar and garlic and grilled over mesquite. Served with chanterelle mushroom and Granny Smith apple cream sauce.</menu_item_description>
+<menu_item_price>36.95</menu_item_price>
+</menu_item>
+<menu_item uid="814842">
+<menu_item_name>Lamb Rack*</menu_item_name>
+<menu_item_description>Eight bone rack of lamb, fresh pear chutney and mint au jus.</menu_item_description>
+<menu_item_price>44.95</menu_item_price>
+</menu_item>
+<menu_item uid="814843">
+<menu_item_name>Prime Porterhouse*</menu_item_name>
+<menu_item_description>Acclaimed combination of the most tender and flavorful cuts of beef. Served with sautéed mushrooms and herb au jus.</menu_item_description>
+<menu_item_price></menu_item_price>
+</menu_item>
+</menu_items>
+</menu_group>
+<menu_group name="STEAK &amp; SEAFOOD" uid="121382">
+<menu_group_description></menu_group_description>
+<menu_items>
+<menu_item uid="814844">
+<menu_item_name>Filet Mignon &amp;
+Roasted Jumbo Scampi*</menu_item_name>
+<menu_item_description>With lemon garlic butter.</menu_item_description>
+<menu_item_price>56.95</menu_item_price>
+</menu_item>
+<menu_item uid="814845">
+<menu_item_name>Filet Mignon &amp;
+Premium Australian Lobster*</menu_item_name>
+<menu_item_description>With drawn butter.</menu_item_description>
+<menu_item_price></menu_item_price>
+</menu_item>
+</menu_items>
+</menu_group>
+<menu_group name="CARVED TABLE SIDE FOR TWO" uid="121383">
+<menu_group_description></menu_group_description>
+<menu_items>
+<menu_item uid="814846">
+<menu_item_name>Châteaubriand*</menu_item_name>
+<menu_item_description>For two. With classic Cliff sauce.</menu_item_description>
+<menu_item_price>105.95</menu_item_price>
+</menu_item>
+</menu_items>
+</menu_group>
+<menu_group name="ACCOMPANIMENTS" uid="121384">
+<menu_group_description></menu_group_description>
+<menu_items>
+<menu_item uid="814847">
+<menu_item_name>Stuffed Twice
+Baked Potatoes</menu_item_name>
+<menu_item_description></menu_item_description>
+<menu_item_price>5.95</menu_item_price>
+</menu_item>
+<menu_item uid="814848">
+<menu_item_name>Sautéed Mushrooms</menu_item_name>
+<menu_item_description></menu_item_description>
+<menu_item_price>8.95</menu_item_price>
+</menu_item>
+<menu_item uid="814849">
+<menu_item_name>Scalloped Potatoes</menu_item_name>
+<menu_item_description></menu_item_description>
+<menu_item_price>6.95</menu_item_price>
+</menu_item>
+<menu_item uid="814850">
+<menu_item_name>Steamed Broccoli with
+Cheddar Cheese Sauce</menu_item_name>
+<menu_item_description></menu_item_description>
+<menu_item_price>7.95</menu_item_price>
+</menu_item>
+<menu_item uid="814851">
+<menu_item_name>Creamed Spinach</menu_item_name>
+<menu_item_description></menu_item_description>
+<menu_item_price>8.95</menu_item_price>
+</menu_item>
+<menu_item uid="814852">
+<menu_item_name>Asparagus with
+Béarnaise Sauce</menu_item_name>
+<menu_item_description></menu_item_description>
+<menu_item_price>9.95</menu_item_price>
+</menu_item>
+</menu_items>
+</menu_group>
+<menu_group name="SAMPLE BLACKBOARD SPECIALS" uid="121385">
+<menu_group_description></menu_group_description>
+<menu_items>
+<menu_item uid="814853">
+<menu_item_name>Appetizer: SESAME CRUSTED YELLOWFIN AHI</menu_item_name>
+<menu_item_description>Crusted with toasted black and white sesame seeds and seared rare. Sliced and served with organic baby arugula, avocado and fresh grapefruit segments. Finished with orange tobiko and wasabi cream.</menu_item_description>
+<menu_item_price>16.95</menu_item_price>
+</menu_item>
+<menu_item uid="814854">
+<menu_item_name>Salad: VINE RIPENED TOMATO AND FRESH MOZZARELLA CAPRESE SALAD</menu_item_name>
+<menu_item_description>Vine ripened organic heirloom tomatoes layered with fresh mozzarella cheese and basil. Topped with avocado relish and white balsamic vinaigrette.</menu_item_description>
+<menu_item_price>11.95</menu_item_price>
+</menu_item>
+<menu_item uid="814855">
+<menu_item_name>COPPER RIVER KING SALMON</menu_item_name>
+<menu_item_description>This famous king of all kings known for its unmistakable rich and full flavor is simply basted with lemon, vermouth and garlic and grilled over mesquite. Served with artichoke tartar. | Filet* and Copper River King Salmon
+Combination</menu_item_description>
+<menu_item_price></menu_item_price>
+</menu_item>
+<menu_item uid="814856">
+<menu_item_name>FILET OSCAR*</menu_item_name>
+<menu_item_description>Two tenderloin medallions pan seared to perfection. Served on a bed of asparagus and topped with fresh Dungeness crab claws and house made béarnaise sauce.</menu_item_description>
+<menu_item_price>46.95</menu_item_price>
+</menu_item>
+<menu_item uid="814857">
+<menu_item_name>DUNGENESS CRAB CRUSTED ALASKAN HALIBUT</menu_item_name>
+<menu_item_description>Alaskan halibut filet crusted with Dungeness crab, fresh vegetables and Jack cheese. Oven roasted golden and served with steamed asparagus spears and creamy lemon chive butter sauce.</menu_item_description>
+<menu_item_price>45.95</menu_item_price>
+</menu_item>
+<menu_item uid="814858">
+<menu_item_name>ISLAND RIB-EYE STEAK*</menu_item_name>
+<menu_item_description>A 24–oz. boneless rib–eye steak marinated in soy, ginger, brown sugar and fresh navel orange juice. Grilled over live mesquite and served with a refreshing mango and papaya salsa and spicy Sriracha tomato sauce.</menu_item_description>
+<menu_item_price>48.95</menu_item_price>
+</menu_item>
+<menu_item uid="814859">
+<menu_item_name>ALASKAN KING CRAB</menu_item_name>
+<menu_item_description>One pound of Alaskan King crab merus legs served with lemon and drawn butter.</menu_item_description>
+<menu_item_price>49.95</menu_item_price>
+</menu_item>
+<menu_item uid="814860">
+<menu_item_name>20-OUNCE METROPOLITAN BONE-IN FILET*</menu_item_name>
+<menu_item_description>Leaving the bone on the filet mignon makes this a truly unique experience. Simply grilled over mesquite and served with crispy housemade onion rings.</menu_item_description>
+<menu_item_price>59.95</menu_item_price>
+</menu_item>
+<menu_item uid="814861">
+<menu_item_name>Seasonal Accompaniment: BAKED ALASKA KING CRAB MACARONI AND CHEESE WITH LOB</menu_item_name>
+<menu_item_description></menu_item_description>
+<menu_item_price>11.99</menu_item_price>
+</menu_item>
+</menu_items>
+</menu_group>
+</menu_groups>
+</menu>
+<menu name="DESSERTS" currency_symbol="" uid="14637">
+<menu_description></menu_description>
+<menu_duration>
+<menu_duration_name></menu_duration_name>
+<menu_duration_time_start></menu_duration_time_start>
+<menu_duration_time_end></menu_duration_time_end>
+</menu_duration>
+<menu_groups>
+<menu_group name="DESSERTS" uid="121386">
+<menu_group_description></menu_group_description>
+<menu_items>
+<menu_item uid="814862">
+<menu_item_name>Chocolate Lava</menu_item_name>
+<menu_item_description>Flourless chocolate cake with eggs, butter, sugar and bittersweet chocolate. Filled with housemade caramel and milk chocolate ganache. Served warm with chantilly cream.</menu_item_description>
+<menu_item_price>9.95</menu_item_price>
+</menu_item>
+<menu_item uid="814863">
+<menu_item_name>Five Layer Carrot Cake</menu_item_name>
+<menu_item_description>Layers of rich carrot cake and butter cream finished with orange crème anglaise and Madagascar vanilla ice cream.</menu_item_description>
+<menu_item_price>10.95</menu_item_price>
+</menu_item>
+<menu_item uid="814864">
+<menu_item_name>Burnt Cream</menu_item_name>
+<menu_item_description>Rich custard made from heavy cream, egg yolks, sugar and vanilla beans. Topped with a crispy caramelized sugar shell.</menu_item_description>
+<menu_item_price>7.95</menu_item_price>
+</menu_item>
+<menu_item uid="814865">
+<menu_item_name>New York Style Cheesecake</menu_item_name>
+<menu_item_description>Classic New York style baked cheesecake with fresh raspberry coulis and chantilly cream.</menu_item_description>
+<menu_item_price>8.95</menu_item_price>
+</menu_item>
+<menu_item uid="814866">
+<menu_item_name>Olympic Mountain Ice Cream or Sorbet</menu_item_name>
+<menu_item_description>Olympic Mountain Creamery uses only the freshest ingredients and rich cream to custom make the velvety smooth flavors for the Metropolitan Grill. Served in an almond florentine cup. Ask your server for today’s selection.</menu_item_description>
+<menu_item_price>5.95</menu_item_price>
+</menu_item>
+<menu_item uid="814867">
+<menu_item_name>White Chocolate Coconut Cake</menu_item_name>
+<menu_item_description>Three layers of rich, dense yellow cake, toasted coconut and white chocolate chips. Frosted with a rich white chocolate icing and served with raspberry coulis.</menu_item_description>
+<menu_item_price>8.95</menu_item_price>
+</menu_item>
+<menu_item uid="814868">
+<menu_item_name>Nine Layer Chocolate Cake</menu_item_name>
+<menu_item_description>Layers of rich, moist devil’s food chocolate caked filled with chocolate butter cream. Served with Olympic Mountain Madagascar vanilla ice cream and a special dark chocolate sauce.</menu_item_description>
+<menu_item_price>12.95</menu_item_price>
+</menu_item>
+</menu_items>
+</menu_group>
+<menu_group name="SWEETS TO SHARE" uid="121387">
+<menu_group_description></menu_group_description>
+<menu_items>
+<menu_item uid="814869">
+<menu_item_name>Hot Apple Pie</menu_item_name>
+<menu_item_description>Granny Smith apples sautéed with brown sugar, butter, cinnamon and cloves. Flambéed tableside and served with Madagascar vanilla ice cream and caramel.</menu_item_description>
+<menu_item_price>18.95</menu_item_price>
+</menu_item>
+<menu_item uid="814870">
+<menu_item_name>Bananas Foster</menu_item_name>
+<menu_item_description>A classic. Bananas sautéed with butter, brown sugar and Myers’s Original Spiced rum. Flambéed tableside and served with Madagascar vanilla ice cream and caramel.</menu_item_description>
+<menu_item_price>18.95</menu_item_price>
+</menu_item>
+<menu_item uid="814871">
+<menu_item_name>Cherries Jubilee</menu_item_name>
+<menu_item_description>Bing cherries sautéed with butter, brown sugar, Chambord liqueur and brandy. Flambéed tableside and served with Madagascar vanilla ice cream.</menu_item_description>
+<menu_item_price>18.95</menu_item_price>
+</menu_item>
+</menu_items>
+</menu_group>
+</menu_groups>
+</menu>
+</menus>
+</omf>

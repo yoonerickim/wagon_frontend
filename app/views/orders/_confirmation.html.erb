@@ -1,0 +1,61 @@
+<h3>Order Details <%= link_to "Edit Order", edit_order_path(@order), remote: true %></h3>
+<table class="line_items">
+  <%= render partial: 'orders/line_item', collection: @order.line_items %>
+</table>
+
+<table class="totals">
+  <tr>
+		<td class="heading">Subtotal</td>
+	  <td id="subtotal" class="subtotal"><%= number_to_currency @order.subtotal / 100.0 %></td>
+	</tr>
+  <% if @order.delivery_fee > 0 %>
+    <tr>
+      <td class="heading">Delivery Fee</td>
+      <td id="delivery_fee" class="subtotal"><%= number_to_currency @order.delivery_fee / 100.0 %></td>
+    </tr>
+  <% end %>
+	<tr>
+		<td class="heading">Tax</td>
+		<td id="tax" class="subtotal"><%= number_to_currency @order.tax / 100.0 %></td>
+  </tr>
+
+	<tr>
+		<td class="heading">Tip <input type="text" id="confirmation_tip" /> %</td>
+		<td class="subtotal tip">
+			<div class='note'>Can be changed after<br/> you receive the order.<br/>
+				<a target="_blank" href="/faq#tips">Learn More &raquo;</a>
+      </div>
+			
+      <span class="tip_amount"><%= number_to_currency @order.tip_amount / 100.0 %></span>
+		</td>
+	</tr>
+
+	<tr>
+		<td class="heading total">Total</td>
+		<td id="total" class="subtotal total total_amount"><%= number_to_currency @order.total / 100.0 %></td>
+	</tr>
+	<tr>
+		<td colspan="2" style="font-size: 10px">For <%= @order.order_type_word %> 
+		  <% if @order.order_type == Order::SPOT_DELIVERY || @order.order_type == Order::ADDRESS_DELIVERY %>
+		    <% if @order.delivery_spot.present? and @order.delivery_spot.lng.present? %>
+		      to (<%= number_with_precision @order.delivery_spot.lat, precision: 4 %>, <%= number_with_precision @order.delivery_spot.lng, precision: 4 %>)
+		    <% end %>
+		    <br><br>
+		     <% if @order.delivery_spot.present? and @order.delivery_spot.reverse_address.present? %>
+		       Approx. Address: <br><%= @order.delivery_spot.reverse_address %>
+		     <% end %>
+		    <br><br>
+		    <b>Please Note:</b><br><br>
+		    <% if @order.location.spot_delivery == true %>
+		       <%= @order.location.vendor.name %> <b>does</b> have delivery staff currently available with GPS-trackable iPhones, 
+		       so you can watch your order come to you!! 
+		    <% else %>
+		       <%= @order.location.vendor.name %> does <b>not</b> have delivery staff currently available with iPhones, so you will not be able 
+		       to track your order's GPS position.  The delivery person will communicate with you 
+		       via text/phone to find you.  
+		    <% end %>
+		
+		  <% end %>
+		</td>
+	</tr>	
+</table>

@@ -1,0 +1,85 @@
+<div id="content" class="dashboard">
+  <div id="vendor_nav">
+    <ul>
+      <%= render 'shared/dashboard_top_tabs', selected: 'contractor' %> 
+    </ul>
+  </div>
+  <div id="content_wrap">
+    <div id="main_tabs">
+      <ul class="tabs">
+        <li><a href="#tab1">Live Orders</a></li>	
+        <li id="t2"><a href="#tab2">Hours &amp; Boundaries</a></li>
+        <li><a href="#tab3">Past Orders</a></li>
+        <li><a href="#tab4">Billing Details</a></li>
+
+      </ul>
+      <!-- <div class="tabs_right_link"><a href="">Back to Orders &raquo;</a></div> --> 
+      <div class="tab_container">
+        <div id="tab1" class="tab_content">
+          <div class="clock_in">
+            <%= render 'clock_in_form' %>
+          </div>
+          <div class="contractor_orders">
+            <%= render 'current_orders_table' %>
+          </div>
+          
+          
+          <div id="in_process_map"></div>
+
+        </div>	
+        <div id="tab2" class="tab_content">
+          <%= render 'preferences' %>
+        </div>
+
+        <div id="tab3" class="tab_content">
+          <p>Coming Soon.</p><table id="current_orders">
+  <thead>
+    <tr>
+      <th width="15%">Status</th>
+      <th width="20%">Customer</th>
+      <th width="15%">Order Total</th>
+      <th width="20%"></th>
+    </tr>
+  </thead>
+
+  </table>
+
+        </div>
+
+        <div id="tab4" class="tab_content">
+          
+          
+          <table id="current_orders">
+            <thead>
+              <tr>
+                <th width="20%">Date &amp; Time</th>
+                <th width="60%">Description</th>
+                <th width="10%">Amount</th>
+                <th width="10%">Balance</th>
+              </tr>
+            </thead>
+   
+            <% total = 0 %>
+            <% for billing_activity in @user.billing_activities %>
+              <tr>
+                <td><%= billing_activity.created_at.in_time_zone(@user.time_zone).strftime("%Y-%m-%d %l:%M%P") %></td>
+                <td><%= billing_activity.description %></td>
+                <td><%= number_to_currency(billing_activity.amount.to_f / 100.0) %></td>
+                <% total = total + (billing_activity.amount.present? ? billing_activity.amount : 0) %>
+                <td><%= number_to_currency(total.to_f / 100.0) %></td>
+              </tr>
+            <% end %>
+
+          </table>          
+          
+          <p>Auto-Bank-Deposit Coming Soon.</p>
+        </div>
+
+      </div><!-- end .tab_container -->
+    </div><!-- end #main_tabs -->
+    <div id="module_boxes">
+      <div class="clear"></div>
+    </div>
+	  
+  </div><!-- end #content_wrap -->
+</div><!-- end #content -->

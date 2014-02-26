@@ -1,0 +1,16 @@
+<tr class='time-slot'>
+  <td>
+    <%= f.object.day %>
+    <%= f.hidden_field :day %>
+  </td>
+  <td align="center">
+    <%= f.time_select :open_at, { :minute_step => 15, :default => { :hour => 10, :minute => 0}, :ampm => true } %>
+  </td>
+  <td align="center">
+    <%= f.time_select :close_at, { :minute_step => 15, :default => { :hour => 21, :minute => 0}, :ampm => true } %>
+  </td>
+  <td>
+    <%= f.check_box :closed %>
+    <%= f.label :closed %>
+  </td>
+</tr>

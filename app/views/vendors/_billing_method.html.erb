@@ -1,0 +1,20 @@
+<div class="field">
+  <%= f.label :card_number, "Credit Card" %>
+  <%= f.text_field :card_number %>
+</div>
+<div class="field">
+  <%= f.label :security_code, "Security Code" %>
+  <%= f.text_field :security_code %>
+</div>
+<div class="field">
+  <%= f.label :card_expiration %>
+  <%= f.date_select :card_expiration, :discard_day => true, :order => [:month, :year], :add_month_numbers => true, :start_year => Time.now.year, :end_year => Time.now.year + 8 %>
+</div>
+<div class="field">
+  <%= f.label :card_type, "Card Type" %>
+  <%= f.select :card_type, ["Visa", "other"] %>
+</div>
+<div class="field">
+  <%= f.label :account_holder, "Name on Card" %>
+  <%= f.text_field :account_holder %>
+</div>

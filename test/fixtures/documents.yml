@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  description: MyText
+  file_uid: MyString
+  documentable_id: 1
+  documentable_type: MyString
+
+two:
+  description: MyText
+  file_uid: MyString
+  documentable_id: 1
+  documentable_type: MyString

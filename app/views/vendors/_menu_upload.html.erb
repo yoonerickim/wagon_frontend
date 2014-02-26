@@ -1,0 +1,13 @@
+<div class="fields">
+  <p>
+    <%= f.label :file, "Menu document: " %>
+    <%= f.file_field :file unless f.object.retained_file %>
+    <%= "\"#{f.object.file.name}\" already uploaded." if f.object.retained_file %>
+    <%= f.hidden_field :retained_file %><br />
+    <%= f.label :description %><br />
+    <%= f.text_area :description, :rows => 3 unless f.object.retained_file %>
+    <%= f.object.description if f.object.retained_file %><br />
+    <p class="info_note">Please include details such as the menu name, start and end times, etc.</p>
+    <%= remove_child_link "remove", f %>
+  </p>
+</div>

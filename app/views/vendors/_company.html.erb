@@ -1,0 +1,9 @@
+<% content_for :company do %>
+  <div class="field_group">
+    <%= f.fields_for :vendor do |builder| %>
+      <%= render 'vendor', :f => builder %>
+      <br />
+      <%= render 'first_user_details', :f => builder %>
+    <% end %>
+  </div>
+<% end %>

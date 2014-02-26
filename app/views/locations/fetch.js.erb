@@ -1,0 +1,13 @@
+<% if @locations.present? %> 
+  $('#listings ul').html("<%=j render :partial => 'home/location', :collection => @locations, :locals => {:q => @q} %>");
+<% else -%>
+  <% if @q.present? -%> 
+    $('#listings ul').html("<div style='padding: 25px; font-size:14px; font-weight: bold;'><p style='font-size: 20px'>No vendors were found that match your filter query.</p><p>Please try again.</p></div>"); 
+  <% else -%>
+    <% if @delivery_type == Order::SPOT_DELIVERY || @delivery_type == Order::ADDRESS_DELIVERY -%>
+      $('#listings ul').html("<div style='padding: 25px; font-size:14px; font-weight: bold;'><p style='font-size: 20px'>No vendors were found that deliver to this spot.</p><p>Please move the pin and try again</p></div>"); 
+    <% else -%> 
+      $('#listings ul').html("<div style='padding: 25px; font-size:14px; font-weight: bold;'><p style='font-size: 20px'>No vendors were found near this spot.</p><p>Please move the pin and try again</p></div>"); 
+    <% end -%> 
+  <% end -%> 
+<% end -%> 

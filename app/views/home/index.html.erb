@@ -1,0 +1,197 @@
+<div id="billboard" class="temp_landing">
+	<div class="billboard_wrap">
+		<div class="text_overlay">
+			<h2>Order what you want and<br/>let food find you!</h2>
+			<p>Say goodbye to old-school address delivery and hello to GPS-based awesomeness.</p>
+			<a class="appstore" href="http://itunes.apple.com/us/app/hit-the-spot/id536455610">Available on the AppStore</a>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+	var home_map = null;
+  var geocoder = new google.maps.Geocoder();
+
+	$(document).ready(function() {	
+	  
+	  
+	  <% if flash[:notice].present? -%>
+	    window.setTimeout(function(){alert("<%= flash[:notice] %>")}, 500);
+	    window.location = "#seperator";
+	    
+	  <% end %>
+
+		var latlng = new google.maps.LatLng(47.646163, -122.362420);
+		var myOptions = {
+		    zoom: 12,
+		    center: latlng,
+		    scrollwheel: false,
+		    disableDefaultUI: true,
+		    mapTypeId: google.maps.MapTypeId.ROADMAP
+		};
+		home_map = new google.maps.Map(document.getElementById("billboard_map"), myOptions);
+		home_map.setOptions({ draggableCursor: 'crosshair' });
+
+    google.maps.event.addListener(home_map, "click", function(event) {home_map_process_click(event.latLng)});
+ 
+	  function home_map_process_click(latLng){
+		  $('#step_one_input_text').val('(' + latLng.lat() + ',' + latLng.lng() + ')');
+		  $('#the_button').attr('disabled', 'disabled');
+		  $('#the_button').val('Loading...')
+		  geocoder.geocode( { 'address': $('#step_one_input_text').val()}, function(results, status) {
+		    if (status == google.maps.GeocoderStatus.OK) {
+	        var lat = results[0].geometry.location.lat();
+	        var lng = results[0].geometry.location.lng();
+	        document.location.href='/confirm_spot?a=' + encodeURIComponent(results[0].formatted_address) + '&lat=' + lat + '&lng=' + lng;	         
+		    }else{
+			    reset_step_one_button();
+			    alert('We were not able to locate this address. Perhaps try to be more specific?');
+		    }
+	    });								
+	  }
+	
+	  <% @map_name = 'home_map' %>
+	  <%= render 'shared/draw_courier_boundaries.js.erb' -%>	
+  }); 
+</script>
+
+<div id="seperator">Order from your phone or start your order below</div>
+
+<div id="billboard_map_container">
+	<div class="billboard_wrap">
+		<div class="text_overlay">
+		
+		<% if User.active_and_clocked_in_couriers.all.present? %>
+		
+  		<h2>Click to Get Started!</h2>
+		
+  		<p>Deliveries can currently be made to/from anywhere in shaded areas. 	  
+  				 Click a spot on the map to get started or use the form below. 
+				
+  				<font style="font-size: 11px; color: #999">More areas coming soon! Follow us on <a target="_blank" href="http://www.twitter.com/HitTheSpot">Twitter</a>, 
+  				 <a target="_blank" href="http://www.facebook.com/HitTheSpotDelivery">Facebook</a>, and/or
+  				 <a target="_blank" href="https://plus.google.com/104744831530803373223">Google+</a> to stay updated. Thanks!</font>	
+  			  </p>
+			
+		<% else %>
+		 
+		<h2>Check Back Soon!</h2>
+		 
+		
+  		<p>We're starting out in the Seattle area delivering on weekdays between 8am and 5pm.     
+  			 Follow us on <a target="_blank" href="http://www.twitter.com/HitTheSpot">Twitter</a>, 
+  			 <a target="_blank" href="http://www.facebook.com/HitTheSpotDelivery">Facebook</a>, and/or
+  			 <a target="_blank" href="https://plus.google.com/104744831530803373223">Google+</a> 
+  			 to find out when &amp; where couriers will be available near you! Added coverage coming soon.
+  		</p>
+		
+		
+		<% end %>
+		</div>
+	</div>
+	<div id="billboard_map"></div>
+	<%# image_tag("billboard.png") -%>
+</div>
+<div id="content" class="landing">
+	<div id="content_wrap">
+
+		<div id="feature_cols">
+			<div class="col left">
+				<div id="landing_billboard">
+					<h3>Step 1: Pick your spot</h3>
+					<!--<select id="step_one_type_select" name="type"> -->
+						<!--<option value="<%= Order::SPOT_DELIVERY %>">Deliver to a spot I'll pinpoint on a map</option> -->
+						<!-- <option value="<%= Order::ADDRESS_DELIVERY %>">For delivery</option> -->
+						<!--<option value="<%= Order::TAKE_OUT %>">Pick up from a restaurant (take-out)</option> -->
+						<!-- <option value="<%= Order::DINE_IN %>">Dine-in at a restaurant</option>	-->
+					<!--</select> -->
+					<input type="hidden" name="type" value="<%= Order::CUSTOM %>">
+					<a href="#" id="bookmarks-button" class="bookmarks" onClick="return false;" title="Stored Spots, Coming Soon (Not enabled yet)">Bookmarks</a>
+			    <%# link_to 'My Spots', dashboard_spots_path, id: 'bookmarks-button', class: 'bookmarks', remote: true %>
+					<input type="text" id="step_one_input_text" size="50" placeholder="Enter a location to get started (e.g. city or zip)">
+					<div title="Use your current GPS Location" id="geo-location-button" class="locations">Locations</div><br/>
+					<input type="button" id="the_button" class="btn_green btn_large green" value="Next &raquo;">
+					<div class="note">Note: more coverage areas soon!</div>
+				</div>
+			</div>
+			<div class="col mid">
+				<h3>Step 2: Enter Your Order</h3>
+				<p>After you confirm your spot you can enter your order <b>exactly</b> how you want it - from wherever 
+					 you want it - and give your best estimate for how much it will cost.  You will <b>only be charged</b> the actual order
+					 total plus a 30% delivery fee ($6 minimum) which includes tip.    
+				</p>
+			</div>
+			<div class="col">
+				<h3>Step 3: Food Finds You</h3>
+				<p> A delivery contractor will confirm your order, let you know how long it will take, and communicate with you along the way. 
+					  You'll be able to 
+					 <b>track 
+					 the exact status of your order</b> (even its current GPS location) as it's delivered to you!  <br><br><a href="/faq">Learn more in our FAQ &raquo;</a>
+			</div>
+			<div class="clear"></div>
+		</div>
+	
+		<div style="display: none;" id="landing_overlay">
+			<div class="overlay_wrapper">
+				<h3>Select Your Spot</h3>
+				<ul id="landing_spots">
+					<li>
+						<div class="name">
+							<h4>Division Street Park</h4>
+							<span>34.466, -98.323</span>
+						</div>
+						<div class="btn">
+							<a href="#">Select</a>
+						</div>
+					
+					</li>
+					<li>
+						<div class="name">
+							<h4>Division Street Park</h4>
+							<span>34.466, -98.323</span>
+						</div>
+						<div class="btn">
+							<a href="#">Select</a>
+						</div>
+					</li>
+					<li>
+						<div class="name">
+							<h4>Division Street Park</h4>
+							<span>34.466, -98.323</span>
+						</div>
+						<div class="btn">
+							<a href="#">Select</a>
+						</div>
+					</li>
+					<li>
+						<div class="name">
+							<h4>Division Street Park</h4>
+							<span>34.466, -98.323</span>
+						</div>
+						<div class="btn">
+							<a href="#">Select</a>
+						</div>
+					</li>
+					<li>
+						<div class="name">
+							<h4>Division Street Park</h4>
+							<span>34.466, -98.323</span>
+						</div>
+						<div class="btn">
+							<a href="#">Select</a>
+						</div>
+					</li>
+				</ul>
+				<div class="buttons">
+					<a class="btn_action btn_med" href="#">Add New Spot</a>
+				</div>
+			</div>
+			<div class="close"><a href="">Close Window</a></div>
+		</div>
+		<div class="clear">
+	</div>
+</div>
+</div>
+<div id="spots-overlay">
+</div>

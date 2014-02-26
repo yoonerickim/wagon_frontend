@@ -1,0 +1,10 @@
+vendors = [
+<% for vendor in @vendors -%>
+		["<%= vendor.name -%>",
+			<%= vendor.locations.first.address.lat -%>,
+			<%= vendor.locations.first.address.lng -%>,
+			<%= vendor.id %>,
+		  "<div id='info_window'><div class='location_info'><a href='#'><img src='/assets/img_default_logo.png'/></a><div class='details'><strong>Vendor Name</strong><br/>Street<br/>City, State, Zip</div><div class='clear'></div></div><div class='order_btns'><a href=''>Delivery</a> <a href=''>Take-Out</a> <a class='end'  href=''>Dine-In</a></div></div>",
+		]<%= ',' unless vendor == @vendors.last -%>
+<% end -%>
+];

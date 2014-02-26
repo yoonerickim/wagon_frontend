@@ -1,0 +1,31 @@
+<% all_couriers = User.active_and_clocked_in_couriers.all -%> 	
+<% if all_couriers.present? -%>
+  var bounds = new google.maps.LatLngBounds();		
+<% end -%> 	
+<% for user in all_couriers -%>	
+  <% @ct = 1 -%>
+  <% if user.delivery_boundaries.present? and user.lat.present? -%> 
+	  boundaryCoordinates<%= @ct %> = new Array(); 
+    bcs = "<%= user.delivery_boundaries %>";
+    bcs = bcs.replace(/[\[|\]|\s]/g, '');
+    bcs = bcs.split(",");
+    for(var i=0; i < (bcs.length - 1); i=i+2) {
+	    boundaryCoordinates<%= @ct %>.push(new google.maps.LatLng(parseFloat(bcs[i]), parseFloat(bcs[i+1]))); 
+			bounds.extend(new google.maps.LatLng(parseFloat(bcs[i]), parseFloat(bcs[i+1])));
+	  }		
+    boundary<%= @ct %> = new google.maps.Polygon({
+	    paths: boundaryCoordinates<%= @ct %>,
+	    strokeColor: "#BD1206",
+	    strokeOpacity: 0.7,
+	    strokeWeight: 2,
+	    fillColor: "#02DDD4",
+	    fillOpacity: 0.3,
+	    clickable: false
+	  });
+	  boundary<%= @ct %>.setMap(<%= @map_name -%>);
+	  <% @ct = @ct + 1 -%> 
+  <% end -%> 
+<% end -%> 	
+ <% if all_couriers.present? and @no_bounds_fit.blank? -%>	
+    <%= @map_name -%>.fitBounds(bounds);
+ <% end -%>

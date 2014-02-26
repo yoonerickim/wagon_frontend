@@ -1,0 +1,60 @@
+<div class="overlay_wrapper">
+	<div class="top_box">
+		<br />
+		<h3 style="font-size: 20px">Send a Message to Your Courier</h3>
+		
+	</div>
+	
+	<div class="categories">
+		<div style="padding: 10px">
+			
+			<div class="messaging section">
+	    <%= form_for @order.notes.build, :url => dashboard_order_user_message_send_path(@order), remote: true do |f| %>
+	      <%= f.hidden_field :order_id %>
+	      <div class="field">
+	        <%= f.label :message, 'Send a message to the courier about this order.' %><br />
+	        <%= f.text_area :message, :rows => 5 %>
+	      </div>
+	      <%= f.submit 'Send Message!', :class => 'btn_med single-clk', 'data-load-msg' => 'sending...' %>
+	    <% end %>			
+			
+			
+			<br /><br />
+
+	    <% if @order.notes.present? %>
+	      <table>
+	        <thead>
+	          <tr>
+	            <th width="90">Previous messages</th>
+	            <th width="10">Time</th>
+	          </tr>
+	        </thead>
+	        <tbody>
+	          <% @order.notes.order('created_at DESC').each do |note| %>
+	            <tr>
+	              <td>
+		              <% if note.author.present? %>
+		             
+		                <p>From: <%= note.author.first_name %> <%= note.author != @order.user ? '(Courier)' : '(Customer)'  %></p>
+		              <% end %>
+	                <%= note.message %>
+									<br /> ------------------------------
+									<br />	<br /><br />
+	              </td>
+	              <td>
+	                <span><%= note.created_at.in_time_zone(@order.user.time_zone).strftime '%m/%d/%y' %></span><br/>
+	                <%= note.created_at.in_time_zone(@order.user.time_zone).strftime '%l:%M %P' %>
+	              </td>
+	            </tr>
+	          <% end %>
+	        </tbody>
+	      </table>
+	    <% end %>			
+		
+		  </div>
+	  </div>
+	</div>
+	<div class="footer"></div>
+</div>		
+
+<div class="close"><a href='#'>Close Window</a></div>

@@ -1,0 +1,9 @@
+<h3>Assigned to:</h3>
+
+<% if @order.location.users.deliverers.present? %>
+	<%= form_for @order, url: dashboard_order_assign_path(@order), remote: true, html: { class: 'deliverer' } do |f| %>
+	  <%= f.collection_select :assigned_to_id, @order.location.users.deliverers, :id, :name, include_blank: 'Select delivery staff member' %>
+	<% end %>
+<% else %>
+  <p><%= link_to "Add a delivery user", dashboard_location_location_roles_path(@order.location) %> to make an assignment (You will need to re-login).</p>
+<% end %>

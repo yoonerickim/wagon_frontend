@@ -1,0 +1,14 @@
+<div class="fields option_item">
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :additional_dollars, 'Additional cost' %>
+    <%= f.text_field :additional_dollars, value: number_to_currency(f.object.additional_dollars) %>
+  </div>
+
+  <%= remove_child_link "remove", f %>
+
+</div>

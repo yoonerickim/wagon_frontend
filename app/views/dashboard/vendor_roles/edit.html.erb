@@ -1,0 +1,38 @@
+<div id="content" class="dashboard">
+	<div id="vendor_nav">
+		<ul>
+			<li class="selected"><%= link_to 'New Venor User', dashboard_vendor_vendor_roles_path(@vendor) %></li>
+			<li><%= link_to 'Dashboard', dashboard_path %></li>			
+		</ul>
+	</div>
+  <div id="content_wrap">
+    <%= render 'shared/flash', flash: flash %>
+
+    <h2>Edit the role of <%= @role.user.name %></h2>
+    <%= form_for @role, url: dashboard_vendor_vendor_role_path(@vendor, @role, :protocol => 'https') do |f| %>
+      <p>
+        <%= f.label :title %>
+        <%= f.text_field :title %>
+      </p>
+      <p>
+        <%= f.label :roletype_id, "Role" %>
+        <%= f.select :roletype_id, Role::VENDOR %>
+      </p>
+      <p>
+        <%= f.label :active %>
+        <%= f.select :active, [["Active", true],["Inactive", false]] %>
+      </p>
+      <%= f.submit :class=>"btn_med"%>
+<div class="clear"></div>
+    <% end %>
+    
+		
+		<br/><br/>
+    <div style="float:left;"><%= link_to 'Delete', dashboard_vendor_vendor_role_path(@vendor, @role), method: :delete, confirm: "This will delete the user from this vendor only. Are you sure?", :class=>"btn_small" %> </div>   <div style="float:left;margin-left:10px;">Delete <%= @role.user.name %> from <%= @vendor.name %></div>
+	
+
+    <br><br>
+  </div>
+  <!--end content_wrap-->
+</div>
+<!--end content-->

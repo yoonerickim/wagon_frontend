@@ -1,0 +1,138 @@
+<!DOCTYPE HTML>
+<html<% if @itemtype.present? -%> itemscope itemtype="<%= @itemtype %>" <% end -%>>
+  <head>
+	  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta property="fb:app_id" content="373740199311333" />    
+	  <% if @page_title.present? %><title><%= @page_title.html_safe %></title><% end %>
+    <% if @page_description.present? %><meta name="description" content="<%= @page_description.html_safe %>"/><% end %>
+    <% if @og_title.present? %><meta property="og:title" content="<%= @og_title.html_safe %>" /> <meta itemprop="name" content="<%= @og_title.html_safe %>"><% end %>
+    <% if @og_description.present? %><meta property="og:description" content="<%= @og_description.html_safe %>" />	<meta itemprop="description" content="<%= @og_description.html_safe %>"> <% end %>
+    <% if @og_img.present? %><meta property="og:image" content="<%= @og_img.html_safe %>" /> <meta itemprop="image" content="<%= @og_img.html_safe %>"><% end %>
+    <% if @og_url.present? %><meta property="og:url" content="<%= @og_url.html_safe %>" /> <% end %>
+    <% if @og_type.present? %><meta property="og:type" content="<%= @og_type.html_safe %>" /><% end %>
+	
+	  <link rel="stylesheet" type="text/css" media="screen" href="/fonts/fonts.css" />
+    <%= stylesheet_link_tag "application" %>
+    <%= javascript_include_tag "application" %>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <%= csrf_meta_tags %>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      <% if Rails.env.production? %> 
+        _gaq.push(['_setAccount', 'UA-26447182-1']);
+      <% else %> 
+        _gaq.push(['_setAccount', 'UA-35010211-1']);
+      <% end %>       
+      _gaq.push(['_trackPageview']);
+      (function() {
+       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+       })();
+     </script>
+  </head>
+
+  <body class="<%= controller.controller_name %>" <%=raw 'id="main_app"' if @origin.present? %>>
+	
+		<div id="fb-root"></div>
+		<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=373740199311333";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));</script>	
+	
+    <div id="wrapper" <%  if request.url.index("/vendors/") || request.url.index("/dashboard")  %>class="vendor"<% end %>>
+      <div id="header">
+        <div id="header_wrap">
+          <div id="logo"><h1><a href="/">Hit The Spot</a></h1></div>
+
+          <% if live_location %>
+
+            <div class="mini_nav">
+                <%= link_to "#{live_location.full_display_name} Dashboard", dashboard_live_path %> <span>|</span>
+                <%= link_to "Logout", logout_path %>
+            </div>
+
+          <% elsif current_user %>
+
+            <div class="mini_nav">
+                Logged in as <%= current_user.email %> <span>|</span>
+                <%= link_to "Dashboard", dashboard_path %> <span>|</span>
+                <%= link_to "Logout", logout_path %>
+            </div>
+
+          <% else %>
+            
+            <div class="mini_nav">
+              <%= link_to "Login", login_path %> <span> or </span>
+              <%= link_to "Sign Up", signup_path %>
+              
+            </div>
+            
+
+            <div id="navigation"><!-- TODO this should be displayed all the time.... maybe? -->
+              <ul id="nav">
+                <li><a href="/about">About</a></li>
+                <li><a href="/faq">FAQ</a></li>
+								<li><a href="/couriers">Become a Courier</a></li>
+              </ul>
+              <div id="messaging">
+              	<!--<a class="app_store" href="/">Available on the App Store</a>-->
+				<a href="http://itunes.apple.com/us/app/hit-the-spot/id536455610"><div class="app_store"></div></a>
+                <p>Android app on the way!</p>
+              </div>
+            </div>
+
+          <% end %>
+          <div class="clear"></div>
+        </div>
+        <!-- end #header_wrap -->
+      </div>
+      <!-- end #header -->
+
+      <% if @origin.present? || request.url.match(/home/) %>
+        <div class="map_flash" style="display: none;"></div>
+
+        <% if flash[:notice].present? %>
+
+	          <script type="text/javascript">
+	            $(document).ready(function(){
+		            <% if request.url.match(/home/) -%> 
+		              window.setTimeout(function(){alert("<%= flash[:notice] %>")}, 1000);
+		            <% else %>
+			            $('.map_flash').html("<%= flash[:notice] %>");
+			            $('.map_flash').fadeIn();
+			            $('.map_flash').delay(8000).fadeOut();
+		            <% end %>
+	            });	          
+	          </script>
+         
+        <% end %>
+
+      <% else %>
+        <% render 'shared/flash', flash: flash %>
+      <% end %>
+      <%= yield %>
+
+      <% if @origin.blank? %>
+        <div id="footer">
+          <div id="footer_wrap">
+            <div class="left">&copy; <%= Time.now.strftime("%Y") %> Hit The Spot, LLC - All Rights Reserved. <span>|</span> <a href="/terms">Terms of Service</a> <span>|</span> <a href="/privacy">Privacy</a> <span>|</span> <a href="/contact">Contact</a></div>
+            <div class="right"></div>
+          </div>
+        </div>
+        <!-- end #footer -->
+      <% end %>
+      <% if @origin.present? %>
+        <div id="footer">
+          <div id="copyright">&copy; <%= Time.now.strftime("%Y") %> Hit The Spot, LLC - All Rights Reserved.</div>
+          <div id="footer_nav"></div>
+        </div>
+        <!--end #footer-->
+      <% end %>
+    </div>
+    <!-- end #wrapper -->
+  </body>
+</html>

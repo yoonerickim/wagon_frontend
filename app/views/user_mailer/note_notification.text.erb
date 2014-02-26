@@ -1,0 +1,17 @@
+<%= @order_note.message %>
+
+============================= 
+End of message
+============================= 
+Sent at: <%= @order_note.created_at.in_time_zone(@order.user.time_zone).strftime '%l:%M %P on %m/%d/%y' %>
+
+Regarding order #<%= @order.id %>. 
+
+<% if @going_to_courier == true %>
+This message was sent from the customer.
+<% else %>
+This message was sent from your delivery courier.
+<% end %>
+
+~The Hit The Spot Team
+http://www.hitthespot.com

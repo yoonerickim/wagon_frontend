@@ -1,0 +1,5 @@
+$('li#location-' + <%= @menu.location.id %>).
+  html("<%=j render 'dashboard/vendors/location', location: @menu.location %>");
+
+$('ul#locations').trigger('change');
+$.fancybox.close();

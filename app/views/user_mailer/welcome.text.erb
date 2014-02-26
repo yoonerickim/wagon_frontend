@@ -1,0 +1,16 @@
+<%= @user.first_name %>, 
+
+Welcome to Hit The Spot!
+
+<% if @user.password_reset_token %>
+To confirm and secure your account, please set your password here:
+<%= edit_password_url(@user.password_reset_token) %>
+
+If the link has expired (after 2 hours) then you can request another one here:
+<%= forgot_password_users_url %>
+<% else %>
+This is confirmation that your account has been created.  You can login anytime at <%= login_url %>
+<% end %>
+
+Cheers, 
+~ The Hit The Spot team
