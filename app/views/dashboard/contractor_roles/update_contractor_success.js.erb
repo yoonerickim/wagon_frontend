@@ -1,8 +1,0 @@
-$('.update_message').html("<p style='color:green'>Sucessfully Updated.</p>"); 
-
-<% if @user.clocked_in == true -%> 
-  $('#clocked_in_text').html('You are clocked in.');
-<% else -%>
-  $('#clocked_in_text').html('You are clocked out.');
-<% end %>
-window.setTimeout(function(){$('.update_message').html('')}, 2000);

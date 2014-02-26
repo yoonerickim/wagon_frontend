@@ -1,3 +1,0 @@
-class Spot < Address
-  
-end

@@ -1,9 +1,0 @@
-$('#location_overlay').html("<%=j render 'locations/menus', :location => @order.location %>");
-$('.subtotal div.order_btn').html("<%=j menu_action @order, :checkout_update_link %>");
-
-<%= render 'locations/menu_lightbox' %>
-<%= render 'locations/menu_logic' %>
-
-var location_overlay = jQuery("#location_overlay");
-location_overlay.fadeIn(400);
-location_overlay.vAlign();

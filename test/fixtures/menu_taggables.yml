@@ -1,9 +1,0 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
-
-one:
-  menu_item_id: 1
-  menu_tag_id: 1
-
-two:
-  menu_item_id: 1
-  menu_tag_id: 1

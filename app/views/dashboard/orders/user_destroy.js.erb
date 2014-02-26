@@ -1,6 +1,0 @@
-var $pending = $('div#pending_orders');
-
-<% @user = @order.user %>
-<% if @user.present? %>
-  $pending.html("<%=j render 'dashboard/accounts/pending_orders' %>")
-<% end %>

@@ -1,4 +1,0 @@
-<% saved_cards.each do |card| %>
-  <%= f.radio_button :saved_card_id, card.id %> 
-  <%= f.label :saved_card_id, "#{card.card_type.capitalize} - #{card.last_four}" %>
-<% end %>

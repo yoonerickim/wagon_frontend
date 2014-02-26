@@ -1,7 +1,0 @@
-<% if @user.present? %>
-  $('#confirm .no-account').hide();
-  $('#sign-in').show();
-  var noAccountUsername = $('#confirm .no-account #order_new_user_email').val();
-  $('#sign-in #username').prop('value', noAccountUsername);
-  $('#sign-in input[type=password]').focus();
-<% end %>

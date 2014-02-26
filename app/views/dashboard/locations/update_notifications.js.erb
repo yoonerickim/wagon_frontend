@@ -1,4 +1,0 @@
-<% if @location.errors.empty? %>
-  $.fancybox.close();
-<% end %>
-$('#settings_box').html("<%=j render 'dashboard/live/settings_box_form', location: @location %>");

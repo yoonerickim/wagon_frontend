@@ -1,8 +1,0 @@
-<% if current_user.orders.active.empty? %>
-  <div class="empty_box directions">
-    <%= link_to "Get a new order started!", root_path, class: 'btn_large' %>
-  </div>
-<% else %>
- <div id="in_process_map"></div>
- 
-<% end %>

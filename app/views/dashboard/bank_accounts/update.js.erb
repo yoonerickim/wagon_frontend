@@ -1,6 +1,0 @@
-<% if @bank_account.errors.empty? %>
-  $('tr#bank_details').html("<%=j render 'dashboard/locations/bank_details', bank_account: @bank_account %>")
-  $.fancybox.close();
-<% else %>
-  $('div#edit_bank').html("<%=j render 'form' %>");
-<% end %>

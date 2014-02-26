@@ -1,5 +1,0 @@
-The following locations have aging orders to be confirmed:
-
-<% @orders.each do |order| %>
-<%= order.vendor.name %> - <%= number_to_phone order.location.phone %> - Order #<%= order.id %> - <%= number_to_currency order.total / 100.0 %>
-<% end %>
