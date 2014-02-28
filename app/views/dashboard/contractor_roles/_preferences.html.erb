@@ -1,0 +1,43 @@
+<%= form_for @user, :url => dashboard_update_contractor_info_path, :remote => true do |f| %>
+  <input type="hidden" value="<%= @role.id %>" name="id">
+  <div>
+    <h4>What are your expected delivery hours?</h4>
+    <p>(Note: please fill this out, but this is for internal use only so Hit The Spot can best anticipate coverage.  You will *only* receive orders if you are 
+	     manually clocked in.)</p>
+    <table id='hours'>
+      <tr>
+        <th></th>
+        <th>Start Time</th>
+        <th>Stop Time</th>
+        <th></th>
+      </tr>
+      <%= f.fields_for :delivery_hours do |builder| %>
+        <%= render 'vendors/hour', :f => builder %>
+      <% end %>
+    </table>
+    <div class="field">
+      <h4>Your Time Zone:</h4>
+      <%= f.select :time_zone, Location::TIME_ZONES %>
+    </div>
+  </div>    
+
+  <div style="margin-bottom: 30px">
+    <h4>What are your delivery boundaries?</h4>
+
+    <ul style="margin-left: 30px; font-size: 12px">
+      <li>If you need to reset the boundaries and start over, <span style="color:blue; cursor: pointer" onClick="resetBoundries();">click here. </span> </li>
+      <li>You can also right-click anywhere on the map to undo your last boundary point placement.</li>
+      <li>Draw your boundaries below in a clockwise or counter-clockwise direction by clicking points on the map around your location.  </li>
+    </ul><br>
+
+    <%= render :partial => 'map_js' %>
+    <div id="map3" style="width: 700px; height: 350px"></div>
+    <input type="hidden" id="delivery_boundaries_json" name="user[delivery_boundaries_json]" value="<%= @user.delivery_boundaries -%>">
+
+  </div>
+
+  <%= f.submit 'Update Hours and Boundaries &raquo;'.html_safe %>  
+  <div class="clear"></div> 
+  <center><span class="update_message"></span></center>
+
+<% end %>      

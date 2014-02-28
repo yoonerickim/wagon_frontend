@@ -1,0 +1,48 @@
+<div id="content" class="dashboard">
+	<div id="vendor_nav">
+		<ul>
+			<li class="selected"><%= link_to 'New Vendor', new_dashboard_vendor_path %></li>
+			<li><%= link_to 'Dashboard', dashboard_path %></li>			
+		</ul>
+	</div>
+  <div id="content_wrap">
+	  <%=raw '<p style="color: green; font-size: 14px;">' + flash[:notice] + '</p>' if flash.present? and flash[:notice].present? %>
+
+    <div id="reg_wizard" class="wizard">
+      <div id="ContactWizard" class="wizard-default-style js">
+        <ul class="steps">
+          <li id="step1">Company</li>
+          <li id="step2">First Location</li>
+          <li id="step3">Delivery Boundaries</li>
+          <li id="step4">Integration &amp; Menu</li>
+          <li id="step5">Terms &amp; Confirm</li>
+        </ul>
+
+        <div class="step_content">
+          <%= form_for [:dashboard, @vendor] do |f| %>
+            <% render 'company', :f => f %>
+            <%= f.fields_for @location do |builder| %>
+              <% render 'vendors/location', :f => builder %>
+            <% end %>
+            <%= render 'vendors/terms', :f => f %>
+            <%= render 'step_one', :f => f %><!-- Company -->
+            <%= render 'vendors/step_two', :f => f %><!-- First Location -->
+            <%= render 'vendors/step_three', :f => f %><!-- Boundaries (conditional) -->
+            <%= render 'vendors/step_four', :f => f %><!-- Integration & Menu -->
+            <%= render 'vendors/step_five', :f => f %><!-- Billing, Terms, & Confirm -->
+          <% end %>
+          <%# template_for :links %><!-- Uncomment if needed -->
+          <%= template_for :menu_uploads %>
+        </div>
+        <!-- end step_content -->
+
+        <%= render 'shared/no_javascript' %>
+
+      </div>
+      <!--end contentwizard-->
+    </div>
+    <!--end reg_wizard-->
+  </div>
+  <!--end content_wrap-->
+</div>
+<!--end content-->

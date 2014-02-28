@@ -1,0 +1,155 @@
+
+<script type="text/javascript">
+
+  $(document).ready(function(){
+	  $('#order_approx_cost').blur(function(){
+		  run_the_numbers();
+	  });
+	
+	  function run_the_numbers(){
+		  if ($('#order_approx_cost').val() != ''){
+			  var approx_cost = parseFloat($('#order_approx_cost').val()); 
+			}else{
+			  var approx_cost = 0;				
+			}
+			
+		  if ((approx_cost * 0.30) > 6){
+			  var approx_fee = approx_cost * 0.30
+		  }else{
+			  var approx_fee = 6.00
+		  }
+		  $('.est_cost').html(approx_cost.toFixed(2));
+		  $('.est_fee').html(approx_fee.toFixed(2));
+		  $('.est_total').html((approx_cost + approx_fee).toFixed(2));
+		  $('.upper_bound').html((approx_cost * 1.35).toFixed(2));
+		  $('.upper_total').html(((approx_cost * 1.35) + approx_fee).toFixed(2));		
+	  }
+	
+	
+	  run_the_numbers();
+	 
+  });
+</script>
+
+
+<%= form_for @order, url: '/custom_order_submit' do |f| %>
+
+  <input type="hidden" name="pin_lat" value="<%= params[:pin_lat] %>">
+  <input type="hidden" name="pin_lng" value="<%= params[:pin_lng] %>">
+  <input type="hidden" name="pin_address" value="<%= params[:pin_address] %>">
+  <input type="hidden" name="location_lat" value="<%= params[:location_lat] %>">
+  <input type="hidden" name="location_lng" value="<%= params[:location_lng] %>">
+  <input type="hidden" name="location_address" value="<%= params[:location_address] %>">
+  <input type="hidden" name="order_id" value="<%= @order.id if @order.present? %>">
+
+  <% unless current_user %>
+    <div class="no-account cc_info">
+      <%= f.fields_for 'new_user', @new_user do |user_fields| %>
+        <div class="field full">
+          <%= user_fields.label :email, "Email Address" %><br />
+          <%= user_fields.text_field :email, class: 'check' %>
+        </div>
+        <div class="field full">
+          <%= user_fields.label :cell_phone, "Cell Phone" %><br />
+          <%= user_fields.text_field :cell_phone %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% if @order.errors.any? %>
+    <div id="error_explaination">
+      <h4><%= pluralize(@order.errors.count, "error") %> need<%= 's' if @order.errors.count == 1 %> to be fixed:</h4>
+      <ul>
+        <% @order.errors.full_messages.each do |msg| %>
+          <li><%= msg.gsub('Saved card', '') %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+
+	<% @static_map_url = 'https://maps.google.com/maps/api/staticmap?' -%>
+	<% @static_map_url += '&size=465x300&maptype=roadmap&sensor=false' -%>
+	<% @static_map_url += '&markers=shadow:false%7Cicon:http%3A%2F%2Fhts-production.s3.amazonaws.com%2Fassets%2Fblue_pin.png' -%>		
+	<% @static_map_url += '%7C' + params[:pin_lat] + ',' + params[:pin_lng] -%>
+	<% @static_map_url += '&markers=shadow:false%7Cicon:http%3A%2F%2Fhts-production.s3.amazonaws.com%2Fassets%2Fred_pin.png' -%>		
+	<% @static_map_url += '%7C' + params[:location_lat] + ',' + params[:location_lng] -%>
+
+  <h3>Order Map  &nbsp;&nbsp; <font style="font-size: 11px">Blue Pin = You &nbsp;&nbsp; Red Pin = Vendor </font> </h3>
+	<img src="<%= @static_map_url -%>" /> <br /><br />
+
+
+  <h3>Order Details for Your Delivery Courier </h3>
+
+  <div class="cc_info">
+      <%= f.hidden_field :order_type, :value => Order::CUSTOM %>
+
+	  <div class="field">
+	    <%= f.label :location_name, "What is the name of this restaurant/vendor where you want food?" %><br />
+	    <%= f.text_field :location_name %>	
+		</div>
+
+	  <div class="field">
+	    <%= f.label :custom_order_body, "What do you want exactly? <font style='font-size: 10px'>(FYI: we can't deliver alcohol or tobacco.)</font>".html_safe %><br />
+	    <%= f.text_area :custom_order_body, :rows => 3, :placeholder => "" %>
+		</div>
+
+		<div class="field">
+	    <%= f.label :approx_cost, "About how much will this cost? (USD) <font style='font-size: 10px'>(see below for details)</font>".html_safe %><br />
+	    <%= f.text_field :approx_cost %>
+		</div>
+  </div>
+  
+  <br /><br />
+
+  <h3>Payment Method</h3>
+
+  <%= f.hidden_field :tip %>
+
+  <div class="clear"></div>
+ 
+  <div id="card_info">
+	  <% if @default_card.present? %>
+	    <%= render 'orders/default_card', f: f %>
+	  <% else %>
+	    <%= render 'orders/new_credit_card', f: f %>
+	  <% end %>
+  </div>
+
+
+  <div class="cc_info">
+
+    <div class="field">
+      <%= f.label :delivery_instructions, "Optional Order Instructions (e.g. ready time, spot details, etc...)" %><br />
+      <%= f.text_area :delivery_instructions, :rows => 3, :placeholder => "" %>
+    </div>
+    
+    <div class="field">
+    	<table>
+    		<tr>
+    			<td class="heading">Estimated Cost</td>
+    			<td>$<span class="est_cost">0.00</span></td>
+    		</tr>
+    		<tr>
+    			<td class="heading">Estimated Delivery Fee</td>
+    			<td>$<span class="est_fee">6.00</span></td>
+    		</tr>
+    		<tr>
+    			<td class="heading">Estimated Total</td>
+    			<td>$<span class="est_total">6.00</span></td>
+    		</tr>
+    	</table>
+    	<p class="costs_note"><strong>Please note:</strong> After submitting this order your card will be authorized for $<span class="est_total">6.00</span>. You will not be charged until your delivery courier picks up the order.  At that time, the actual cost of your order (you will see the receipt) plus the delivery fee (30% or $6 min, includes tip) will be charged to your card.  
+	          If the actual cost of the order is more than 35% of your estimated cost (i.e. $<span class="upper_bound">6.00</span>), the courier will contact you for approval. </p>
+    </div>
+    
+    <div class="field full terms">
+      <%= f.check_box :terms -%> <%= f.label :terms, "I agree to the above and to the <a target='_blank' href='/terms'>Terms and Conditions</a>".html_safe %>
+    </div>
+    <%= f.submit 'Submit Order', class: 'btn_med single-clk' %>
+    <div class="clear"></div>
+  </div>
+
+<% end %>

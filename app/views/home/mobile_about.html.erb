@@ -1,0 +1,49 @@
+<html>
+<head>
+	<%= stylesheet_link_tag "application" %>
+	<%= javascript_include_tag "application" %>
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>    
+</head>
+<body id="mobile">
+<h2>What is Hit The Spot?</h2>
+
+<p>Hit The Spot is a GPS-based ordering and delivery service:</p>
+<ol>
+	<li><b>Pick Your Spot</b></li>
+	<li><b>Enter Your Order</b></li>
+	<li><b>Food Finds You</b></li>
+</ol>
+
+<p>Note: we are currently serving Seattle's South Lake Union, Belltown, and Lower Queen Anne neighborhoods during weekday lunch hours.</p>
+
+ <p> You can order from any restaurant, vendor, or store within range of an available delivery 
+	 courier (blue shaded regions) and the GPS signal from your phone - or any spot you designate - will be used to find you. More coverage areas and times are coming soon!</p>
+
+<p>Learn more at <a href="http://www.hitthespot.com/faq">www.hitthespot.com/faq</a>, or follow us on Twitter (<a href="http://www.twitter.com/HitTheSpot">@HitTheSpot</a>), 
+   Facebook (<a href="http://www.facebook.com/HitTheSpotDelivery">/HitTheSpotDelivery</a>), and/or <a href="https://plus.google.com/104744831530803373223">Google+</a>.</p>
+
+<h2>Questions? Feedback?</h2>
+<p>Your Email:<br /> <input type="text" id="email" name="email"><br /><br />
+   Your Message:<br />
+   <textarea id="body" name="body" cols="22" rows="5"></textarea> <br /><br />
+   <input type="submit" id="the_submit" value="Send">
+
+   <script type="text/javascript">
+     $(document).ready(function(){
+       $("#the_submit").click(function(){
+          var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+         if (re.test($("#email").val()) && $('#body').val().length > 0){
+           if (confirm("Are you sure you want to send this now?")){
+             $("#the_submit").val("Sending...");
+             $("#the_submit").attr("disabled", "disabled");       
+             $.post('/send_mobile_feedback', { email: $("#email").val(), body: $('#body').val() } );           
+           }
+         }else{
+           alert("Please double check your email address and ensure you've entered a message.")
+         }
+       })       
+     })
+   </script>
+
+</body>
+</html>

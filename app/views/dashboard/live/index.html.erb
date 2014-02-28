@@ -1,0 +1,62 @@
+<div id="content" class="dashboard">
+  <div id="vendor_nav">
+    <ul>
+      <li class="selected"><%= link_to "Live Location Dashboard", dashboard_live_url %></li>
+    </ul>
+  </div>
+  <div id="content_wrap">
+    <div id="red_alert" style="display:none;"><%= live_location.orders.submitted.count %> New Orders Submitted</div>
+    <h2><%= live_location.vendor.name %> &mdash; <%= live_location.address.street1 %></h2>
+    <div id="main_tabs">
+
+      <ul class="tabs">
+        <li><a href="#tab1">Current Live Orders</a></li>
+        <li><a href="#tab2">Current Live Map</a></li>
+      </ul>
+
+      <div style="float: right; margin-right: 22px; padding-top: 10px">
+        <a href="#settings_box" class="settings btn_med">Notification Settings</a><br><br>
+      </div>
+
+      <div class="tab_container">
+
+        <div id="tab1" class="tab_content">
+          <%= render 'current_orders_table' %>
+        </div>
+
+        <div id="tab2" class="tab_content">
+          <div class="current_map" data-location-lat="<%= live_location.address.lat %>" data-location-lng="<%= live_location.address.lng %>"></div>
+          <div id="current_stats">
+	         <!--
+            <div class="stat_box">
+              <div class="left">Current Pending Orders</div>
+              <div class="right"><%# live_location.orders.pending.count %></div>
+              <div class="clear"></div>
+            </div>
+           
+            <div class="stat_box">
+              <div class="left">Current Submitted Orders</div>
+              <div class="right"><%# live_location.orders.submitted.count %></div>
+              <div class="clear"></div>
+            </div>
+            -->
+          </div>
+        </div>
+
+      </div>
+      <div class="clear"></div>
+    </div>
+
+    <!-- end #main_tabs -->
+    <div id="module_boxes">
+      <div class="clear"></div>
+    </div>
+  </div>
+  <!--end content_wrap-->
+</div>
+<!--end content-->
+<div style="display:none;">
+  <div id="settings_box">
+    <%= render 'settings_box_form', location: live_location %>
+  </div>
+</div>

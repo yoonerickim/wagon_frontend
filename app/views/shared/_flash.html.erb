@@ -1,0 +1,8 @@
+<% flash.each do |key, value| %>
+  <%= content_tag :p, value, :class => "flash_#{key}" %>
+<% end %>
+<script type="text/javascript">
+  window.setTimeout(function(){
+	  $('.flash_alert').fadeOut();
+  }, 3000)
+</script>

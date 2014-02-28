@@ -1,0 +1,7 @@
+<% if current_user %>
+  $('#sign-up').html("<%=j render 'shared/flash', flash: flash  %>");
+  $('#sign-in').prev('.user-state').html("You are now signed in.");
+<% else %>
+  $('#sign-un').children('p:first-child').remove();
+  $('#sign-up').prepend("<%=j render 'shared/flash', flash: flash  %>");
+<% end %>

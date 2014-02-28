@@ -1,0 +1,33 @@
+<div class="overlay_wrapper">
+	<div class="top_box">
+		<br />
+		<h3 style="font-size: 20px">Edit This Order</h3>
+		
+	</div>
+	
+	<div class="categories">
+		<div style="padding: 10px">
+	  <%= form_for @order, :url => dashboard_order_user_update_path(@order), :remote => true do |f| %>
+	
+	    <%= f.label :location_name, "Vendor/restaurant name" %>
+	    <%= f.text_field :location_name %> <br /> <br />
+
+	    <%= f.label :custom_order_body, "Your order details <br />".html_safe %>
+	    <%= f.text_area :custom_order_body, :rows => 4 %> <br /> <br />
+
+
+	    <%= f.label :approx_cost, "Approx. cost of this order" %>
+	    $<%= f.text_field :approx_cost, :size => 4 %> <br /> <br />
+
+      <font style="font-size:10px">NOTE: Updating the cost of your order means you are authorizing Hit The Spot
+	    to charge your card up to 35% greater than this amount plus the delivery fee. However, you will only be charged the 
+	    <i>actual</i> cost plus the delivery fee. <br /><br />
+      <%= f.submit "Update Order" %>
+	
+	  <% end %>
+	  </div>
+	</div>
+	<div class="footer"></div>
+</div>		
+
+<div class="close"><a href='#'>Close Window</a></div>

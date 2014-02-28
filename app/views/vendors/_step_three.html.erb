@@ -1,0 +1,143 @@
+<div id="step-3" class="step one_column">
+
+  <div id="no_delivery" style="display:none" class="column_one label_yes_no"><h3>Since you have no delivery options selected you may skip this step.</h3>
+	  <p>You can always choose to add delivery down the road.</p>
+	  <ul class="form_nav">
+      <li class="prev"><span>&laquo; Previous Step</span></li>
+      <li id="s3_next" class="next next1"><span>Next Step &raquo;</span></li>    </ul>
+	</div>
+  
+  <div id="yes_delivery" class="column_one label_yes_no">
+    <h3>Step 3 - What are this location's delivery boundaries?</h3>
+
+    <%= render :partial => 'shared/map_functions' %>
+
+     <!--
+	    <input type="radio" id="boundary_type_1" name="boundary_type" value="1" <%= 'checked' if params[:boundary_type].blank? || params[:bountry_type] == '1' -%>>
+	    We'll deliver within a <input type="text"  size="3" value="<%= (@location.present? and @location.delivery_radius.present?) ? @location.delivery_radius : '10' -%>" name="location[delivery_radius]">-mile radius of our location. <br>
+     
+	    <input type="radio" id="boundary_type_2" name="boundary_type" value="2" <%= 'checked' if params[:boundary_type] == '2' -%>>
+	    Let me draw the delivery boundaries on a map.  <br><br>
+     --> 
+
+     <input type="hidden" name="boundary_type" value="2"> 
+
+    <script type="text/javascript">
+    	$(document).ready(function() {
+	      //$('#boundary_type_1').click(function(){
+		    //  $('#map_div').hide();
+	      //});
+	  
+	      google.maps.event.addListener(map,'click',buildBoundaries);
+	      google.maps.event.addListener(map,'rightclick',removeLastBoundary);
+		    
+	    });
+	
+	    function loadUpBoundariesMap(){
+		
+	      google.maps.event.trigger(map, 'resize');      
+        clearOverlays();
+        //var htsMarkerImage = '<%= asset_path("icon_pin.png") -%>';
+
+			  var myLatLng = new google.maps.LatLng( parseFloat($('#lat').val()), parseFloat($('#lng').val()));
+			  var firstMarker = new google.maps.Marker({
+			      position: myLatLng,
+			      map: map, 
+			      title: $('#location_vendor_attributes_name').val()
+			  });
+			  markers.push(firstMarker);
+			  map.setCenter(myLatLng);
+			  map.setZoom(12);		
+		
+	    }
+	
+	    function resetBoundries(){
+		
+		    boundaryCoordinates = [];
+		    $('#delivery_boundaries').val('');
+		    lastBoundary.setMap(null);
+		
+    	}
+
+      function removeLastBoundary(){
+
+	      if (boundaryCoordinates.length > 0){
+				  boundaryCoordinates.pop();
+				  var lastPos = boundaryCoordinates[boundaryCoordinates.length - 1]
+				  setBoundaries(lastPos);
+	      }
+      }
+
+      function setBoundaries(pos){
+	
+				 var image = '<%= asset_path("dot-blue-transparent.png") -%>';
+
+	        if (boundaryMarker){boundaryMarker.setMap(null);};
+
+          if (boundaryCoordinates.length < 2){
+					  boundaryMarker = new google.maps.Marker({
+					      position: pos,
+					      map: map,
+					      icon: image
+					  });
+			    }
+
+				  boundary = new google.maps.Polygon({
+				    paths: boundaryCoordinates,
+				    strokeColor: "#BD1206",
+				    strokeOpacity: 0.7,
+				    strokeWeight: 2,
+				    fillColor: "#02DDD4",
+				    fillOpacity: 0.3,
+				    clickable: false
+				  });
+
+				  if (lastBoundary) {
+				    lastBoundary.setMap(null);
+				  };
+				  boundary.setMap(map);
+				  lastBoundary = boundary;
+
+	        var boutput = '[';
+	        for(var i=0; i < boundaryCoordinates.length; i++) {
+				    boutput += '[' + boundaryCoordinates[i].lat() + "," + boundaryCoordinates[i].lng() +  "]";
+				    if (i != boundaryCoordinates.length - 1){boutput += ','}; 
+				  }
+				  boutput += ']';
+				  $('#delivery_boundaries_json').val(boutput);	
+	  
+      }
+	
+	    function buildBoundaries(event) {
+		    var thelatlng = new google.maps.LatLng(event.latLng.lat(), event.latLng.lng())
+			  boundaryCoordinates.push(thelatlng);
+        setBoundaries(thelatlng); 
+			}
+
+		</script>
+
+    <div id="map_div">
+	    <p>
+		    Draw your boundaries below in a clockwise or counter-clockwise direction by clicking points on the map around your location (i.e. do not click on your location itself to start).  
+		    If you need to reset the boundaries and start over, <span style="color:blue; cursor: pointer" onClick="resetBoundries();">click here. </span> You can also right-click anywhere on the map to undo your last boundary point placement.
+		  </p><br>
+      <div id="map5" style="width: 800px; height: 400px"></div>
+      <br>
+      <p>When the boundary looks correct above, click on "Next Step" below. </p>
+    </div>
+
+
+    <input type="hidden" id="lat1" name="lat1">
+    <input type="hidden" id="lat2" name="lat2">
+    <input type="hidden" id="lng1" name="lng1">
+    <input type="hidden" id="lng2" name="lng2">
+    <input type="hidden" id="delivery_boundaries_json" name="location[delivery_boundaries_json]" value="<%= params[:location][:delivery_boundaries] rescue nil -%>">
+
+
+
+    <ul class="form_nav">
+      <li class="prev"><span>&laquo; Previous Step</span></li>
+      <li id="s3_next" class="next next1"><span>Next Step &raquo;</span></li>    </ul>
+  </div>
+  <div class="clear"></div>
+</div>

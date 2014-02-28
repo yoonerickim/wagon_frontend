@@ -1,0 +1,7 @@
+<% if @good_to_go -%> 
+  $('#email').val('');
+<% end -%>
+$('#emailsubmit').val('Keep me posted');
+$('#emailsubmit').removeAttr('disabled');
+alert("<%= @response.html_safe -%>")
+

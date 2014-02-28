@@ -1,0 +1,290 @@
+<div id="confirmation_info">
+  <div id="confirm">
+    <% if @order.errors.any? %>
+      <div id="error_explaination">
+        <%= pluralize(@order.errors.count, 'error') %> need to be fixed:
+        <ul>
+          <% @order.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="order_actions section">
+      <h3>Order Status: <span><%= @order.state.gsub(/_/, ' ').capitalize %></span></h3>
+      <h4>Actions</h4>
+      <div class="action_btns">
+        <% if @order.submitted? %>
+         
+           If the order is priced reasonably and appears to be the correct location - go ahead and confirm it. 
+           This sends an email to the customer letting them know you are now working on acquiring their order. <br /><br />
+
+           If the order is wonky in any way - call/text the customer to get it sorted before confirming. <br /><br />
+
+          <%# link_to "Confirm This Order", dashboard_order_confirm_dialog_path(@order), class: 'btn_small grey confirm', remote: true %> 
+           <%= form_for @order, :url => dashboard_order_confirm_path(@order), :method => :put, :remote => true do |f| -%>
+
+
+		        <%= f.label :location_name, "Location:" %>
+		        <%= f.text_field :location_name %> <br /><br />
+
+		        <%= f.label :custom_order_body, "Order: <br />".html_safe %>
+		        <%= f.text_area :custom_order_body, :rows => 5 %>  <br /><br />
+
+			      <%= f.label :confirm_notes, '<b>Send an optional note</b> to the customer about this order <br>(e.g. any last min questions, about how long it will take, etc...).'.html_safe %>
+			      <br /><br>
+			      <%= f.text_area :confirm_notes, :rows => 4 %> <br /><br />
+
+             <%= f.submit "Confirm Order", :confirm => "Are you sure the order looks correct?" %>
+           <% end %>
+          <br /><br /><br /><br />
+
+          <%= link_to "Cancel This Order", dashboard_order_cancel_path(@order), class: 'btn_small grey', remote: true, confirm: 'Are you sure you want to cancel this order on behalf of the customer?', method: :post %>
+        <% elsif @order.confirmed? || @order.on_delivery? %>
+          <% if @order.confirmed? %>
+  
+             Now it's time to go to the vendor (or call in the order first), pay for it, pick it up, snap a photo of the receipt, and deliver the order to the customer. 
+             <br /><br />
+             After you have taken a pic of the receipt (make sure it's readable!), then press "Order Picked-Up" below which will let the customer know you are on your way!  
+             <br /><br /><br />
+
+             If the actual cost is more than <font style="font-size: 20px"><b><%= number_to_currency ((@order.approx_cost.to_f) * 1.35) %></b></font> then contact the customer and tell him/her to raise their 
+             estimated cost to the actual cost of the order before you submit this.
+             <br /><br /><br />
+    
+
+             <%= form_for @order, :url => dashboard_order_deliver_path(@order), :method => :post, :remote => true do |f| -%>
+ 
+            <%# link_to "Order Picked-Up", dashboard_order_deliver_path(@order), class: 'btn_small grey', remote: true, confirm: "Have to taken a photo of the receipt?", method: :post %> 
+
+		        <%= f.label :receipt_image %>
+		        <%= f.file_field :receipt_image, :class=>"upload" %>
+		        <%= f.hidden_field :retained_receipt_image %> 
+		 <br/><br />
+		        <%= f.label :actual_cost %>
+		        <%= f.text_field :actual_cost %>  <br /><br />
+		
+		         <br />
+               <%= f.submit :value => 'I have picked-up the order', :confirm => "Are you sure the actual order total matches the total on the receipt?" %>
+             <% end %>
+
+            <br /><br /><br /><br />
+          <% end %>
+          <% if @order.on_delivery? %>
+
+            After you have delivered this order to the customer, press "Has Been Fulfilled"  <br /><br />
+
+            <% if @order.receipt_image_uid.present? %>
+						  <a class="lightbox" href="#bigger_r"><%= image_tag @order.receipt_image.thumb('50x50>').url -%></a>
+						
+						  <div id="bigger_r" style="display:none"><%= image_tag @order.receipt_image.thumb('800x800>').url -%></div>
+						  <br /><br />
+						<% end -%>
+            
+
+	          <%= link_to "Has Been Fulfilled", dashboard_order_fulfill_path(@order), class: 'btn_small grey', remote: true, confirm: "Are you sure?  The customer has their order and is happy?", method: :post %>
+             
+<br /><br /><br /><br />
+            <%= link_to "Undeliverable", dashboard_order_undeliverable_path(@order), class: 'btn_small grey', remote: true, confirm: "Are you sure?  You are not able to make this delivery?", method: :post %> 
+          <% end %>
+
+
+
+          <%= link_to "Cancel This Order", dashboard_order_cancel_path(@order), class: 'btn_small grey', remote: true, confirm: "Are you sure you want to cancel this order on behalf of the customer?", method: :post %>
+
+        <% else %>
+          This order has been completed.
+        <% end %>
+      </div>
+    </div>
+
+    <% unless @order.contractor_delivery? %>
+      <div class="deliverer section">
+        <%# render 'dashboard/orders/assign_deliverer' %>
+      </div>
+    <% end %>
+
+    <table>
+      <thead>
+        <tr>
+          <th width="100">Customer</th>
+          <th width="100">Cell Phone</th>
+          <th width="100">Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= @order.user.name %></td>
+          <td><%= number_to_phone @order.user.cell_phone %></td>
+          <td><%= @order.user.email %></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table>
+      <thead>
+        <tr>
+          <th width="100">Location</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <% case @order.order_type.to_s %>
+            <% when Order::SPOT_DELIVERY %>
+            <% when Order::CONTRACTOR %>
+              Delivery<br />
+              (<%= number_with_precision @order.delivery_spot.lat, precision: 4 %>, 
+              <%= number_with_precision @order.delivery_spot.lng, precision: 4 %>)<br />
+              <%= @order.delivery_spot.reverse_address %> (Approximate)
+            <% when Order::ADDRESS_DELIVERY %>
+              Delivery<br />
+              <% if @order.delivery_spot.use_reverse %>
+                <%= @order.delivery_spot.reverse_address %>
+              <% else %>
+                <%= @order.delivery_spot.street1 %><br />
+                <%= @order.delivery_spot.street2 %><br />
+                <%= @order.delivery_spot.city %>, <%= @order.delivery_spot.state %><br />
+              <% end %>
+            <% when Order::TAKE_OUT %>
+              Take Out
+            <% when Order::DINE_IN %>
+              Dine In
+            <% when Order::CUSTOM %>
+            <%= @order.location_name %><br />
+            <a target="_blank" href="http://maps.google.com/?q=<%= "(#{@order.delivery_spot.lat},#{@order.delivery_spot.lng})" %>">(<%= number_with_precision @order.delivery_spot.lat, precision: 4 %>, 
+            <%= number_with_precision @order.delivery_spot.lng, precision: 4 %>)</a><br />
+            <%= @order.delivery_spot.reverse_address %> (Approximate)
+            <% end %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <% if @order.delivery_instructions.present? %>
+      <div class="order_details instructions section">
+        <table>
+          <thead>
+            <tr>
+              <th width="100">Custom Instructions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= @order.delivery_instructions %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
+
+
+    <% if current_user.is_super_user? %>
+    <div class="payment_actions section">
+      <h3>Pay Status: <span><%= @order.pay_state.capitalize %></span></h3>
+      <h4>Actions</h4>
+      <div class="action_btns">
+        <% if @order.payment_authorized? %>
+          <% if @order.need_to_reauthorize? %>
+            <p>
+              Authorized for: <%= number_to_currency @order.transactions.authorized.last.amount / 100.0 %> 
+              Total is: <%= number_to_currency @order.total / 100.0 %> 
+              <%= link_to "Reauthorize?", dashboard_order_reauthorize_path(@order), remote: true, confirm: "Are you sure?", method: :post %>
+            </p>
+          <% end %>
+
+          <%# Location staff not allowed to capture a final order %>
+          <%# unless @order.submitted? %>
+            <%# link_to "Capture", dashboard_order_capture_path(@order), class: 'btn_small grey', remote: true, method: :post %> 
+          <%# end %>
+
+          <%= link_to "Void the pending charge", dashboard_order_void_path(@order), class: 'btn_small grey', remote: true, confirm: "Are you sure?", method: :post %>
+        <% elsif @order.payment_captured? || @order.payment_settled? %>
+          <%= link_to "Refund", dashboard_order_refund_path(@order), class: 'btn_small grey', remote: true, confirm: "Are you sure?", method: :post %>
+
+        <% else %>
+          Payment is finalized.
+        <% end %>
+      </div>
+    </div>
+    <% end %>
+
+    <% if @order.confirm_notes.present? %>
+      <table>
+        <thead>
+          <tr>
+            <th width="100">Order Confirmation Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= @order.confirm_notes %></td>
+          </tr>
+        </tbody>
+      </table>
+    <% end %>
+    
+    <table>
+      <thead>
+        <tr>
+          <th width="100">Event</th>
+          <th width="100">Date</th>
+          <th width="100">Time</th>
+        </tr>
+      </thead>
+      <% Order::TIMESTAMPS.each do |field| %>
+        <% if @order.send(field).present? %>
+          <tr>
+            <td><%= field.to_s.gsub(/_at/, '').gsub(/_/, ' ').capitalize %></td>
+            <td><%= @order.send(field).in_time_zone(@order.user.time_zone).strftime '%D' %></td>
+            <td><%= @order.send(field).in_time_zone(@order.user.time_zone).strftime '%r' %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </table>
+	<div class="messaging section">
+    <%= form_for [:dashboard, @order.notes.build], remote: true do |f| %>
+      <%= f.hidden_field :order_id %>
+      <div class="field">
+        <%= f.label :message, 'Send an email to the customer about this order. (If urgent, call their cell # above)' %><br />
+        <%= f.text_area :message, :rows => 5 %>
+      </div>
+      <%= f.submit 'Send Message!', :class => 'btn_med single-clk', 'data-load-msg' => 'sending...' %>
+    <% end %>
+
+    <br/><br/><br/>
+
+    <% unless @order.notes.empty? %>
+      <table>
+        <thead>
+          <tr>
+            <th width="90">Previous messages</th>
+            <th width="10">Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @order.notes.order('created_at DESC').each do |note| %>
+            <tr>
+              <td>
+	              <% if note.author.present? %>
+	                <p>From: <%= note.author.name %> <%= note.author != @order.user ? '(Courier)' : '(Customer)'  %></p>
+	              <% end %>
+                <%= note.message %>
+              </td>
+              <td>
+                <span><%= note.created_at.in_time_zone(@order.user.time_zone).strftime '%m/%d/%y' %></span><br/>
+                <%= note.created_at.in_time_zone(@order.user.time_zone).strftime '%l:%M %P' %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+	</div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  prepLightBoxes();
+</script>

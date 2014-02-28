@@ -1,0 +1,70 @@
+<div id="content" class="dashboard">
+	<div id="vendor_nav">
+		<ul>
+			<li class="selected"><%= link_to 'Your Profile', dashboard_account_path %></li>
+			<li><%= link_to 'Dashboard', dashboard_path %></li>			
+		</ul>
+	</div>
+  <div id="content_wrap">
+    <%# raw '<p style="color: green; font-size: 14px;">' + flash[:notice] + '</p>' if flash.present? and flash[:notice].present? %>
+    <%= render 'shared/flash', flash: flash %>
+    <%= form_for [:dashboard, @user] do |f| %>
+		  <% if @user.errors.any? %>
+		    <div id="error_explaination">
+		      <h4><%= pluralize(@user.errors.count, "error") %> need to be fixed:</h4>
+					<ul>
+			      <% @user.errors.full_messages.each do |msg| %>
+			        <li><%= msg %></li>
+			      <% end %>
+			    </ul>
+		    </div>
+		  <% end %>
+		
+		  <p>
+		    <%= f.label :first_name, "First Name" %>
+		    <%= f.text_field :first_name %>
+		  </p>
+
+		  <p>
+		    <%= f.label :first_name, "Last Name" %>
+		    <%= f.text_field :last_name %>
+		  </p>
+		
+		  <p>
+		    <%= f.label :email, "Email" %>
+		    <%= f.text_field :email %>
+		  </p>		
+		
+		  <p>
+		    <%= f.label :cell_phone, "Cell Phone #" %>
+		    <%= f.text_field :cell_phone, value: number_to_phone(f.object.cell_phone) %>
+      </p>
+
+		<input type="submit" value="Update Profile &raquo;" class="btn_med">
+		<div class="clear"></div>
+    <% end %>
+	
+    <%= form_for @user, url: dashboard_user_update_password_path(@user) do |f| %>
+      <p>
+        <%= label_tag 'current_password', 'Current Password' %>
+        <%= password_field_tag 'current_password' %>
+      </p>
+
+      <p>
+        <%= f.label :password %>
+        <%= f.password_field :password %>
+      </p>
+		
+      <p>
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation %>
+      </p>
+
+      <%= f.submit "Change Password &raquo;".html_safe, :class=>"btn_med" %>
+	<div class="clear"></div>
+    <% end %>
+
+  </div>
+  <!--end content_wrap-->
+</div>
+<!--end content-->

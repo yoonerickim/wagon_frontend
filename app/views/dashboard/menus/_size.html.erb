@@ -1,0 +1,19 @@
+<div class="fields size">
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= f.label :dollars, 'Price' %>
+    <%= f.text_field :dollars, value: number_to_currency(f.object.dollars) %>
+  </div>
+
+  <%= remove_child_link "remove size", f %>
+
+</div>

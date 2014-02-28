@@ -1,0 +1,5 @@
+<ul>
+  <% @spots.each do |spot| %>
+    <li><span data-formatted="<%= spot.spot_formatted %>"><%= spot.name %></span></li>
+  <% end %>
+</ul>

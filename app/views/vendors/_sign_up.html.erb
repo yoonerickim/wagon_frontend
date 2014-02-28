@@ -1,0 +1,61 @@
+<%= form_for @vendor, :url => vendors_path(:protocol => 'https') do |f| %>
+  <% if @vendor.errors.any? %>
+    <div id="error_explaination">
+      <h4><%= pluralize(@vendor.errors.count, "error") %> need<%= 's' if @vendor.errors.count == 1 %> to be fixed:</h4>
+			<ul>
+	      <% @vendor.errors.full_messages.each do |msg| %>
+	        <li><%= msg %></li>
+	      <% end %>
+	    </ul>
+    </div>
+  <% end %>
+  <p>
+    <%= f.label :name, "Company Name" %>
+    <%= f.text_field :name %>
+  </p>
+  <%= f.fields_for :roles do |role_fields| %>
+    <%= role_fields.fields_for :user do |user_fields| %>
+       <%= user_fields.hidden_field :is_vendor_signup, :value => true %>
+      <p>
+        <%= user_fields.label :first_name, "Your First Name" %>
+        <%= user_fields.text_field :first_name %>
+      </p>
+      <p>
+        <%= user_fields.label :last_name, "Your Last Name" %>
+        <%= user_fields.text_field :last_name %>
+      </p>
+      <p>
+        <%= user_fields.label :email, "Your Email Address" %>
+        <%= user_fields.text_field :email %>
+      </p>
+      <p>
+        <%= user_fields.label :cell_phone, "Your Cell Phone #" %>
+        <%= user_fields.text_field :cell_phone %>
+       <!-- <br>
+        <div style="margin: 10px 0px;">
+          <input type="checkbox" id="terms_agree" name="terms_agree" value="1">
+        
+	        <label for="terms_agree">
+		        <span > I agree to the <a target="_blank" href="/terms">Terms and Conditions</a>.</span>
+		      </label>
+	      </div> -->
+      </p>
+    <% end %>
+  <% end %>
+  <%= f.submit "Get Started!", :onClick => "this.value = 'Starting...'; return checkStuff();", :class => "btn_large", :id => 'thesubmit' %>
+<% end %>
+
+  <script type="text/javascript">
+    function checkStuff(){
+	    // $('#thesubmit').attr('disabled') == 'disabled';
+	    // if ($('#terms_agree').attr('checked') == 'checked'){
+	    // 		    return true
+	    // }else{
+	    // 		    alert('Please agree to the terms and conditions before continuing.');
+	    //         $('#thesubmit').removeAttr('disabled') == 'disabled';
+	    // 		    		
+	    // 		    $('#thesubmit').val('Get Started!');
+	    // 		    return false; 
+	    // }
+    }
+  </script>

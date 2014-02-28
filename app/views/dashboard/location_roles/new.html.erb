@@ -1,0 +1,62 @@
+<div id="content" class="dashboard">
+	<div id="vendor_nav">
+		<ul>
+			<li class="selected"><%= link_to 'New Venor User', dashboard_location_location_roles_path(@location) %></li>
+			<li><%= link_to 'Dashboard', dashboard_path %></li>			
+		</ul>
+	</div>
+  <div id="content_wrap">
+    <%= render 'shared/flash', flash: flash %>
+
+    <h2>Add a new user</h2>
+    <%= form_for @role, :url => dashboard_location_location_roles_path(@location, protocol: https) do |f| %>
+      <% if @role.errors.any? %>
+        <div id="error_explaination">
+          <%= pluralize(@role.errors.count, "error") %> need to be fixed:
+        </div>
+        <ul>
+          <% @role.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      <% end %>
+
+      <%= f.fields_for :user do |user_fields| %>
+        <p>
+          <%= user_fields.label :first_name %>
+          <%= user_fields.text_field :first_name %>
+        </p>
+        <p>
+          <%= user_fields.label :last_name %>
+          <%= user_fields.text_field :last_name %>
+        </p>
+        <p>
+          <%= user_fields.label :email %>
+          <%= user_fields.text_field :email %>
+        </p>
+        <p class="note">
+          A link to set a password will be sent to this user, if an account is not already setup.
+        </p>
+      <% end %>
+
+      <p>
+        <%= f.label :title, 'Internal Title (e.g. Barista)' %>
+        <%= f.text_field :title %>
+      </p>
+      <p>
+        <%= f.label :roletype_id, "Role" %>
+        <%= f.select :roletype_id, Role::LOCATION %>
+      </p>
+      <p>
+        <%= f.label :active %>
+        <%= f.select :active, [["Active", true],["Inactive", false]] %>
+      </p>
+
+      <%= f.submit :class=>"btn_med"%>
+	  <div class="clear"></div>
+    <% end %>
+
+  </div>
+  <!--end content_wrap-->
+</div>
+<!--end content-->

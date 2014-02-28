@@ -1,0 +1,37 @@
+<div id="content" class="dashboard">
+	<div id="vendor_nav">
+		<ul>
+			<li class="selected"><%= link_to 'Edit Vendor User', dashboard_location_location_roles_path(@location) %></li>
+			<li><%= link_to 'Dashboard', dashboard_path %></li>			
+		</ul>
+	</div>
+  <div id="content_wrap">
+    <%= render 'shared/flash', flash: flash %>
+
+    <h2>Edit <%= @role.user.name %></h2>
+    <%= form_for @role, url: dashboard_location_location_role_path(@location, @role, :protocol => 'https') do |f| %>
+      <p>
+        <%= f.label :title %>
+        <%= f.text_field :title %>
+      </p>
+      <p>
+        <%= f.label :roletype_id, "Role" %>
+        <%= f.select :roletype_id, Role::LOCATION %>
+      </p>
+      <p>
+        <%= f.label :active %>
+        <%= f.select :active, [["Active", true],["Inactive", false]] %>
+      </p>
+      <br/>
+      <%= f.submit :class=>"btn_med" %>
+      <div class="clear"></div>
+    <% end %>
+    
+    <div style="float: left;margin-right: 10px;"><%= link_to 'Delete', dashboard_location_location_role_path(@location, @role), class: 'btn_small grey', method: :delete, confirm: "This will delete the user from this location only. Are you sure?" %></div>
+    <div class="note">Or delete <%= @role.user.name %> from <%= @location.name %></div>
+
+    <br><br>
+  </div>
+  <!--end content_wrap-->
+</div>
+<!--end content-->

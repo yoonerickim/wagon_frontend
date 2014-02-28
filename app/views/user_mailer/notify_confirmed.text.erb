@@ -1,0 +1,15 @@
+Hello <%= @order.user.name %>!
+
+Your order (#<%= @order.id %>) has been confirmed! (This means your Hit The Spot Delivery Courier has accepted your order and has begun the process of acquiring it for you.)
+
+<% if @order.confirm_notes.present? %>
+----------
+Note From Courier:
+----------
+<%= @order.confirm_notes %>
+
+----------
+----------
+
+<% end %>
+<%= render 'shared/mailers/order_detail', order: @order %>

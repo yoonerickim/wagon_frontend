@@ -1,0 +1,8 @@
+
+<% if @good_to_go == true -%> 
+	var currentOrders = $('#current_orders');
+	currentOrders.html("<%=j render 'dashboard/accounts/current_orders' %>");
+	$('#location_overlay').fadeOut();
+<% else -%>
+  alert("Please double check your order info and try again."); 
+<% end -%>

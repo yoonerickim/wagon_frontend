@@ -1,0 +1,33 @@
+<h1>Edit Bank</h1>
+<%= form_for [:dashboard, @bank_account], remote: true do |f| %>
+  <% if @bank_account.errors.any? %>
+    <div id="error_explaination">
+      <%= pluralize(@bank_account.errors.count, "error") %> need to be fixed:
+      <ul>
+        <% @bank_account.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.hidden_field :location_id %>
+
+  <div class="field">
+    <%= f.label :institution, "Bank Institution" %>
+    <%= f.text_field :institution %>
+  </div>
+  <div class="field">
+    <%= f.label :account, "Account Number" %>
+    <%= f.text_field :account %>
+  </div>
+  <div class="field">
+    <%= f.label :routing, "Routing Number" %>
+    <%= f.text_field :routing %>
+  </div>
+  <div class="field">
+    <%= f.label :account_type %>
+    <%= f.select :account_type, BankAccount::TYPES %>
+  </div>
+  <%= f.submit class: 'single-clk' %>
+<% end %>
