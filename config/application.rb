@@ -40,7 +40,7 @@ module Hitthespot
     config.filter_parameters += [:card_number, :card_cvv, :account_number, :routing_number]
 
     # Enable the asset pipeline
-    config.assets.enabled = true
+    config.assets.enabled = false 
 
     # Dragonfly Uploads
     config.middleware.insert 0, 'Rack::Cache', {
