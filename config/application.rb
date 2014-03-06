@@ -40,7 +40,7 @@ module Hitthespot
     config.filter_parameters += [:card_number, :card_cvv, :account_number, :routing_number]
 
     # Enable the asset pipeline
-    config.assets.enabled = false 
+    config.assets.enabled = true 
 
     # Dragonfly Uploads
     config.middleware.insert 0, 'Rack::Cache', {
@@ -49,6 +49,9 @@ module Hitthespot
       :entitystore => URI.encode("file:#{Rails.root}/tmp/dragonfly/cache/body")
     } unless Rails.env.production?
     config.middleware.insert_after 'Rack::Cache', 'Dragonfly::Middleware', :images
+
+    # Heroku
+    config.assets.initialize_on_precompile = false
 
   end
 end
