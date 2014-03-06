@@ -50,5 +50,7 @@ module Hitthespot
     } unless Rails.env.production?
     config.middleware.insert_after 'Rack::Cache', 'Dragonfly::Middleware', :images
     
+    # For Heroku
+    config.assets.initialize_on_precompile = false   
   end
 end
