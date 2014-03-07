@@ -49,6 +49,9 @@ module Hitthespot
       :entitystore => URI.encode("file:#{Rails.root}/tmp/dragonfly/cache/body")
     } unless Rails.env.production?
     config.middleware.insert_after 'Rack::Cache', 'Dragonfly::Middleware', :images
+
+    # Heroku
+    config.assets.initialize_on_precompile = false
     
   end
 end
