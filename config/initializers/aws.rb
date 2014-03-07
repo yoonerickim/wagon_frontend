@@ -11,8 +11,8 @@ unless Rails.env.development? || Rails.env.test?
             @theenv = 'DEMO' if Rails.env.demo?
             @theenv = 'STAGING' if Rails.env.staging? 
             @theenv = 'PRODUCTION' if Rails.env.production? 
-            message.from = 'HTS ' + @theenv + ' EMAIL <developer@hitthespot.com>'
-            message.to  = "developer@hitthespot.com"
+            message.from = 'HTS ' + @theenv + ' EMAIL <mike@labs8.com>'
+            message.to  = "mike@labs8.com"
             message.cc  = nil if !message.cc.nil?
             message.bcc = nil if !message.bcc.nil?
         end
