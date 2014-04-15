@@ -64,17 +64,6 @@ GEM
     braintree (2.21.0)
       builder (>= 2.0.0)
     builder (3.0.4)
-    capistrano (2.13.4)
-      highline
-      net-scp (>= 1.0.0)
-      net-sftp (>= 2.0.0)
-      net-ssh (>= 2.0.14)
-      net-ssh-gateway (>= 1.1.0)
-    capistrano-conditional (0.0.3)
-      capistrano
-      git
-    capistrano-resque (0.0.7)
-      capistrano
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -117,10 +106,8 @@ GEM
     geokit-rails3 (0.1.5)
       geokit (~> 1.5)
       rails (~> 3.0)
-    git (1.2.5)
     gyoku (0.4.4)
       builder (>= 2.1.2)
-    highline (1.6.15)
     hike (1.2.1)
     httparty (0.8.1)
       multi_json
@@ -149,11 +136,7 @@ GEM
     multi_xml (0.4.1)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
-    net-sftp (2.0.5)
-      net-ssh (>= 2.0.9)
     net-ssh (2.3.0)
-    net-ssh-gateway (1.1.0)
-      net-ssh (>= 1.99.1)
     nokogiri (1.4.7)
     nokogiri-happymapper (0.3.6)
       nokogiri (~> 1.4.2)
@@ -208,8 +191,6 @@ GEM
     ruby-hmac (0.4.0)
     ruby_parser (2.2.0)
       sexp_processor (~> 3.0)
-    rvm-capistrano (1.2.7)
-      capistrano (>= 2.0.0)
     sass (3.1.15)
     sass-rails (3.2.4)
       railties (~> 3.2.0)
@@ -273,9 +254,6 @@ DEPENDENCIES
   asset_sync
   aws-sdk
   bcrypt-ruby (~> 3.0.1)
-  capistrano
-  capistrano-conditional
-  capistrano-resque (= 0.0.7)
   coffee-rails (~> 3.2.1)
   declarative_authorization (= 0.5.5)
   dragonfly (= 0.9.10)
@@ -298,7 +276,6 @@ DEPENDENCIES
   resque
   resque_mailer
   ruby_parser
-  rvm-capistrano
   sass-rails (~> 3.2.3)
   savon (= 0.9.7)
   simplecov (= 0.5.4)

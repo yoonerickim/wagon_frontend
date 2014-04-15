@@ -11,10 +11,13 @@
     <% if @og_url.present? %><meta property="og:url" content="<%= @og_url.html_safe %>" /> <% end %>
     <% if @og_type.present? %><meta property="og:type" content="<%= @og_type.html_safe %>" /><% end %>
 	
-	  <link rel="stylesheet" type="text/css" media="screen" href="/fonts/fonts.css" />
-    <%= stylesheet_link_tag "application" %>
-    <%= javascript_include_tag "application" %>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+        <link rel="stylesheet" type="text/css" media="screen" href="/fonts/fonts.css" />
+        <%= stylesheet_link_tag "application" %>
+        <%= javascript_include_tag "application" %>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
     <%= csrf_meta_tags %>
     <script type="text/javascript">
       var _gaq = _gaq || [];
@@ -44,7 +47,7 @@
 		}(document, 'script', 'facebook-jssdk'));</script>	
 	
     <div id="wrapper" <%  if request.url.index("/vendors/") || request.url.index("/dashboard")  %>class="vendor"<% end %>>
-      <div id="header">
+       <div id="header">
         <div id="header_wrap">
           <div id="logo"><h1><a href="/">Hit The Spot</a></h1></div>
 
@@ -76,7 +79,7 @@
               <ul id="nav">
                 <li><a href="/about">About</a></li>
                 <li><a href="/faq">FAQ</a></li>
-								<li><a href="/couriers">Become a Courier</a></li>
+								<li><a href="/couriers">Become a Driver</a></li>
               </ul>
               <div id="messaging">
               	<!--<a class="app_store" href="/">Available on the App Store</a>-->
@@ -89,7 +92,7 @@
           <div class="clear"></div>
         </div>
         <!-- end #header_wrap -->
-      </div>
+      </div> 
       <!-- end #header -->
 
       <% if @origin.present? || request.url.match(/home/) %>

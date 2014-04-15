@@ -31,8 +31,8 @@ ActiveRecord::Schema.define(:version => 20121102221752) do
     t.string   "zip"
     t.integer  "addressable_id"
     t.string   "addressable_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
     t.float    "lat"
     t.float    "lng"
     t.string   "nickname"
@@ -116,8 +116,8 @@ ActiveRecord::Schema.define(:version => 20121102221752) do
     t.string   "institution"
     t.string   "last_four"
     t.integer  "location_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
     t.integer  "usa_epay_payment_method_id"
     t.string   "account_type"
     t.integer  "user_id"
@@ -140,8 +140,8 @@ ActiveRecord::Schema.define(:version => 20121102221752) do
     t.string   "card_type"
     t.string   "account_holder"
     t.integer  "location_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "custom_locations", :force => true do |t|
@@ -164,8 +164,8 @@ ActiveRecord::Schema.define(:version => 20121102221752) do
     t.string   "state"
     t.string   "zip"
     t.integer  "order_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
   end
 
   create_table "documents", :force => true do |t|
@@ -173,8 +173,8 @@ ActiveRecord::Schema.define(:version => 20121102221752) do
     t.string   "file_uid"
     t.integer  "documentable_id"
     t.string   "documentable_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
   end
 
   create_table "gvendors", :force => true do |t|
@@ -199,22 +199,22 @@ ActiveRecord::Schema.define(:version => 20121102221752) do
   create_table "item_tag_links", :force => true do |t|
     t.integer  "menu_item_id"
     t.integer  "item_tag_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "item_tags", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "line_item_options", :force => true do |t|
     t.integer  "line_item_id"
     t.integer  "menu_option_item_id"
     t.integer  "quantity"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
     t.boolean  "locked",              :default => false
     t.string   "option_name"
     t.string   "name"
@@ -227,8 +227,8 @@ ActiveRecord::Schema.define(:version => 20121102221752) do
     t.integer  "menu_item_id"
     t.integer  "menu_size_id"
     t.text     "special_instructions"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
     t.boolean  "locked",               :default => false
     t.string   "name"
     t.integer  "price"
@@ -239,8 +239,8 @@ ActiveRecord::Schema.define(:version => 20121102221752) do
     t.string   "name"
     t.string   "value"
     t.integer  "linkable_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
     t.string   "linkable_type"
   end
 
@@ -248,8 +248,8 @@ ActiveRecord::Schema.define(:version => 20121102221752) do
     t.integer  "vendor_id"
     t.string   "description"
     t.string   "phone"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                                             :null => false
+    t.datetime "updated_at",                                                             :null => false
     t.boolean  "dine_in"
     t.boolean  "take_out"
     t.boolean  "address_delivery"
@@ -280,8 +280,8 @@ ActiveRecord::Schema.define(:version => 20121102221752) do
     t.text     "description"
     t.string   "uid"
     t.integer  "menu_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "menu_items", :force => true do |t|
@@ -290,8 +290,8 @@ ActiveRecord::Schema.define(:version => 20121102221752) do
     t.string   "uid"
     t.integer  "price"
     t.integer  "menu_group_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
     t.string   "image_uid"
     t.string   "image_name"
   end
@@ -300,8 +300,8 @@ ActiveRecord::Schema.define(:version => 20121102221752) do
     t.integer  "menu_option_id"
     t.string   "name"
     t.integer  "additional_cost"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "menu_options", :force => true do |t|
@@ -311,8 +311,8 @@ ActiveRecord::Schema.define(:version => 20121102221752) do
     t.string   "information"
     t.integer  "minimum"
     t.integer  "maximum"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "menu_sizes", :force => true do |t|
@@ -321,8 +321,8 @@ ActiveRecord::Schema.define(:version => 20121102221752) do
     t.integer  "price"
     t.integer  "calories"
     t.integer  "menu_item_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "menus", :force => true do |t|
@@ -331,8 +331,8 @@ ActiveRecord::Schema.define(:version => 20121102221752) do
     t.time     "start_at"
     t.time     "end_at"
     t.string   "uid"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.integer  "location_id"
   end
 
@@ -342,8 +342,8 @@ ActiveRecord::Schema.define(:version => 20121102221752) do
     t.string   "device_uid"
     t.string   "version_uid"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "order_items", :force => true do |t|
@@ -376,15 +376,15 @@ ActiveRecord::Schema.define(:version => 20121102221752) do
     t.string   "state"
     t.integer  "order_id"
     t.integer  "saved_card_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
   end
 
   create_table "orders", :force => true do |t|
     t.integer  "user_id"
     t.integer  "location_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                    :null => false
+    t.datetime "updated_at",                                    :null => false
     t.integer  "tip",                        :default => 15
     t.boolean  "terms",                      :default => false
     t.float    "tax_rate",                   :default => 0.0
@@ -414,7 +414,7 @@ ActiveRecord::Schema.define(:version => 20121102221752) do
     t.string   "receipt_image_name"
     t.string   "location_name_original"
     t.text     "custom_order_body_original"
-    t.boolean  "use_customer_geometry"
+    t.boolean  "use_customer_geometry",      :default => false
   end
 
   add_index "orders", ["location_id"], :name => "index_orders_on_location_id"
@@ -449,29 +449,29 @@ ActiveRecord::Schema.define(:version => 20121102221752) do
     t.string   "state"
     t.string   "zip"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
   end
 
   create_table "speed_menu_accounts", :force => true do |t|
     t.string   "make"
     t.string   "model"
     t.integer  "location_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "tag_links", :force => true do |t|
     t.integer  "tag_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.integer  "location_id"
   end
 
   create_table "tags", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.boolean  "standard"
   end
 
@@ -481,8 +481,8 @@ ActiveRecord::Schema.define(:version => 20121102221752) do
     t.time     "open_at"
     t.time     "close_at"
     t.integer  "location_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
     t.boolean  "delivery",    :default => false
     t.integer  "user_id"
   end
@@ -493,16 +493,16 @@ ActiveRecord::Schema.define(:version => 20121102221752) do
     t.float    "lat"
     t.float    "lng"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|
     t.string   "email"
     t.string   "cell_phone"
     t.string   "password_digest"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                                       :null => false
+    t.datetime "updated_at",                                                       :null => false
     t.string   "password_reset_token"
     t.datetime "password_reset_sent_at"
     t.string   "first_name"
@@ -528,8 +528,8 @@ ActiveRecord::Schema.define(:version => 20121102221752) do
     t.string   "name"
     t.string   "website"
     t.string   "phone"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
     t.string   "registration_token"
     t.string   "legal_name"
     t.text     "description"

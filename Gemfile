@@ -59,10 +59,10 @@ end
 # gem 'ruby-debug19', :require => 'ruby-debug'
 group :development do
 
-  gem 'capistrano'
-  gem 'rvm-capistrano'
-  gem 'capistrano-resque', '0.0.7'
-  gem 'capistrano-conditional', :require => false # <-- This is important!  
+#  gem 'capistrano'
+#  gem 'rvm-capistrano'
+#  gem 'capistrano-resque', '0.0.7'
+#  gem 'capistrano-conditional', :require => false # <-- This is important!  
   #gem 'vlad'
   #gem 'vlad-nginx'
   #gem 'vlad-unicorn'
